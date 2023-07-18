@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.publisher
+id: publisher-anonymous
+label: Anonymous
+weight: -102
+internal: true
+audience: anonymous
+group_type: publisher
+permissions_ui: true
+permissions:
+  - 'view dataset entity'
+  - 'view group'
+  - 'view resource entity'

@@ -1,0 +1,59 @@
+dataset.settings_tab:
+  route_name: dataset.settings
+  title: 'Dataset Settings'
+  base_route: dataset.settings
+
+entity.dataset.view:
+  route_name: entity.dataset.canonical
+  base_route: entity.dataset.canonical
+  title: View
+
+entity.dataset.add_resource:
+  route_name: ekan_core.dataset.add_resource
+  base_route: entity.dataset.canonical
+  title: Add Resource
+
+entity.dataset.page_edit:
+  route_name: entity.dataset.edit_form
+  base_route: entity.dataset.canonical
+  title: Edit
+
+entity.dataset.delete_confirm:
+  route_name: entity.dataset.delete_form
+  base_route: entity.dataset.canonical
+  title: Delete
+
+resource.settings_tab:
+  route_name: resource.settings
+  title: 'Resource Settings'
+  base_route: resource.settings
+
+entity.resource.view:
+  route_name: entity.resource.canonical
+  base_route: entity.resource.canonical
+  title: View
+
+entity.resource.page_edit:
+  route_name: entity.resource.edit_form
+  base_route: entity.resource.canonical
+  title: Edit
+
+entity.resource.delete_confirm:
+  route_name: entity.resource.delete_form
+  base_route: entity.resource.canonical
+  title: Delete
+
+entity.resource.dataset_redirect:
+  route_name: ekan_core.resource.dataset_redirect
+  base_route: entity.resource.canonical
+  title:  Back to dataset
+
+entity.resource.download_file:
+  route_name: ekan_core.resource.download_file
+  base_route: entity.resource.canonical
+  title:  Download
+
+entity.resource.api_link:
+  route_name: ekan_core.resource.api_link
+  base_route: entity.resource.canonical
+  title:  Go to resource

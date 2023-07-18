@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.search_box
+  module:
+    - views
+  theme:
+    - ekan_theme
+id: exposedformsearch_boxpage_1
+theme: ekan_theme
+region: navbar_branding
+weight: -10
+provider: null
+plugin: 'views_exposed_filter_block:search_box-page_1'
+settings:
+  id: 'views_exposed_filter_block:search_box-page_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+visibility: {  }

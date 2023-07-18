@@ -1,0 +1,36 @@
+id: ekan_publisher
+label: Publisher
+migration_group: ekan
+source:
+  plugin: d7_node
+  node_type: group
+  constants:
+    default_text_format: 'full_html'
+process:
+  uid:
+    -
+      plugin: migration_lookup
+      migration: ekan_user
+      source: node_uid
+    -
+      plugin: default_value
+      default_value: 0
+  label: title
+  field_description/value: body/0/value
+  field_description/format: constants/default_text_format
+  field_image/target_id:
+    plugin: migration_lookup
+    migration: ekan_file
+    source: field_image/0/fid
+  field_image/title: field_image/0/title
+  field_image/alt: field_image/0/alt
+
+destination:
+  plugin: entity:group
+  default_bundle: publisher
+  validate: true
+
+migration_dependencies:
+  required:
+    - ekan_file
+    - ekan_user

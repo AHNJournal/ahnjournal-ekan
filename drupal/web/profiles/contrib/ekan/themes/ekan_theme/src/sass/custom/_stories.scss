@@ -1,0 +1,18 @@
+.Stories-content {
+  .stories-main-content {
+    display: block;
+    column-count: 2;
+
+    .views-row {
+      margin-bottom: 4em;
+    }
+
+    @media #{$mobile} {
+      column-count: auto;
+
+      views-row {
+        margin-bottom: 4em;
+      }
+    }
+  }
+}

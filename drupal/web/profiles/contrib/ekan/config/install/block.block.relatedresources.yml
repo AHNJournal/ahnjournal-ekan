@@ -1,0 +1,25 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - ekan_core
+    - system
+  theme:
+    - ekan_theme
+id: relatedresources
+theme: ekan_theme
+region: content
+weight: 0
+provider: null
+plugin: resources_with_same_dataset
+settings:
+  id: resources_with_same_dataset
+  label: Resources
+  label_display: visible
+  provider: ekan_core
+visibility:
+  request_path:
+    id: request_path
+    pages: "/dataset/*\r\n/resource/*/edit\r\n/node/*\r\n<front>\r\n/user/*\r\n/search\r\n/search-box\r\n/admin/*"
+    negate: true
+    context_mapping: {  }

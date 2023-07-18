@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: file_date
+label: 'File date'
+locked: false
+pattern: 'M d, Y'

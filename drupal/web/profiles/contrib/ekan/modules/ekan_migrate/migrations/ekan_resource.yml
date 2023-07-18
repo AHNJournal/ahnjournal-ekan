@@ -1,0 +1,66 @@
+id: ekan_resource
+label: Resource
+migration_group: ekan
+source:
+  plugin: d7_node
+  node_type: resource
+  constants:
+    default_text_format: 'full_html'
+process:
+  uid:
+    -
+      plugin: migration_lookup
+      migration: ekan_user
+      source: node_uid
+    -
+      plugin: default_value
+      default_value: 0
+
+  title: title
+  created: created
+  changed: changed
+  body/value: body/0/value
+  body/format: constants/default_text_format
+  dataset_ref:
+    plugin: sub_process
+    source: field_dataset_ref
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: ekan_dataset
+        source: target_id
+  resource_format:
+    plugin: migration_lookup
+    migration: ekan_format
+    source: field_format
+  upload:
+    plugin: sub_process
+    source: field_upload
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: ekan_file
+        source: fid
+  link_remote_file:
+    plugin: sub_process
+    source: field_link_remote_file
+    process:
+      target_id:
+        plugin: migration_lookup
+        migration: ekan_file
+        source: fid
+  link_api/uri: field_link_api/0/url
+  link_api/title: field_link_api/0/title
+  datastore_status: field_datastore_status
+  orphan: field_orphan
+
+destination:
+  plugin: entity:resource
+  validate: true
+
+migration_dependencies:
+  required:
+    - ekan_dataset
+    - ekan_format
+    - ekan_file
+    - ekan_user

@@ -1,0 +1,2 @@
+route_callbacks:
+  - '\Drupal\ekan_statistics\Routing\EkanStatisticsRoutes::routes'

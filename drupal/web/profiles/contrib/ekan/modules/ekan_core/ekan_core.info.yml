@@ -1,0 +1,18 @@
+name: 'EKAN Core'
+type: module
+description: 'Ekan core module.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'EKAN'
+dependencies:
+  - drupal:node
+  - drupal:group
+  - drupal:gnode
+  - drupal:geofield
+  - drupal:key_value_field
+  - drupal:taxonomy
+  - drupal:leaflet
+  - drupal:migrate_plus
+  - drupal:migrate_tools
+  - drupal:entity
+  - drupal:jsonapi_earlyrendering_workaround

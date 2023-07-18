@@ -1,0 +1,19 @@
+langcode: en
+status: false
+dependencies:
+  module:
+    - system
+  theme:
+    - ekan_theme
+id: ekan_theme_messages
+theme: ekan_theme
+region: navbar_branding
+weight: -9
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Status messages'
+  label_display: '0'
+  provider: system
+visibility: {  }

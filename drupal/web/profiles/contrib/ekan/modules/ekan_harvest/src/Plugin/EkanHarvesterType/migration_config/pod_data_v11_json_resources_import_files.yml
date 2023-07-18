@@ -1,0 +1,90 @@
+id: pod_data_v11_json_resources
+label: Project Open Data v1.1 JSON Resources
+migration_group: ekan_harvest
+source:
+  track_changes: true
+  plugin: pod_data_v11_resource_from_datasets_url
+  import_files: true
+  data_fetcher_plugin: file
+  data_parser_plugin: pod_data_v11_resource_from_datasets_json
+  item_selector: /dataset
+  fields:
+    -
+      name: dataset_id
+      selector: dataset_id
+    -
+      name: title
+      selector: title
+    -
+      name: downloadURL
+      selector: downloadURL
+    -
+      name: accessURL
+      selector: accessURL
+    -
+      # e.g: pdf
+      name: format
+      selector: format
+    -
+      name: description
+      selector: description
+    -
+      # e.g: application/pdf
+      name: mediaType
+      selector: mediaType
+    -
+      # e.g: Education
+      name: resourceType
+      selector: resourceType
+  ids:
+    dataset_id:
+      type: string
+    title:
+      type: string
+    format:
+      type: string
+process:
+  title: title
+  dataset_ref:
+    plugin: entity_lookup
+    entity_type: dataset
+    value_key: uuid
+    source: dataset_id
+  body/value: description
+  body/format:
+    plugin: default_value
+    default_value: 'full_html'
+  resource_format:
+    source: _format
+    plugin: entity_generate
+    value_key: name
+    bundle_key: vid
+    bundle: format
+    entity_type: taxonomy_term
+    ignore_case: true
+  resource_type:
+    source: _resourceType
+    plugin: entity_generate
+    value_key: name
+    bundle_key: vid
+    bundle: resource_type
+    entity_type: taxonomy_term
+    ignore_case: true
+  link_api/uri: _link_api_uri
+  link_remote_file:
+    source: _link_remote_file
+    plugin: entity_generate
+    entity_type: file
+    value_key: uri
+  upload:
+    source: _upload
+    plugin: ekan_file_generate
+    entity_type: file
+    value_key: uri
+
+#  debug:
+#    plugin: callback
+#    callable: var_dump
+#    source: dataset_id
+destination:
+  plugin: entity:resource

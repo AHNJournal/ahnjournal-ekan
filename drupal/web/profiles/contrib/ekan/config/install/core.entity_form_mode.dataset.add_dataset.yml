@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_core
+id: dataset.add_dataset
+label: 'Add dataset'
+targetEntityType: dataset
+cache: true

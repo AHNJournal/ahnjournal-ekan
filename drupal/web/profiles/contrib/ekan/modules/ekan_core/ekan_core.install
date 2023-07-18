@@ -1,0 +1,135 @@
+<?php
+
+/**
+ * @file
+ * Install and update hooks for ekan core.
+ */
+
+use Drupal\ekan_core\Entity\EkanDatasetEntity;
+use Drupal\ekan_core\Entity\EkanResourceEntity;
+use Drupal\group\Entity\Group;
+use Drupal\taxonomy\Entity\Vocabulary;
+
+/**
+ * Re-Assign orphaned GroupContent entities.
+ */
+function ekan_core_update_9001(&$sandbox) {
+
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+  $entity_type_manager = \Drupal::service('entity_type.manager');
+  $storage_handler = $entity_type_manager->getStorage('group_content');
+
+  // Set up the batch by retrieving all of the group content IDs.
+  if (!isset($sandbox['progress'])) {
+    $sandbox['ids'] = $storage_handler->getQuery()->accessCheck(FALSE)->execute();
+    $sandbox['max'] = count($sandbox['ids']);
+    $sandbox['progress'] = 0;
+    $sandbox['reassigned'] = 0;
+    $dummy_group = Group::create([
+      'type' => 'publisher',
+      'label' => "[[dummy group]]",
+      'status' => 0,
+    ]);
+    $dummy_group->save();
+    $sandbox['dummy_group'] = $dummy_group;
+  }
+
+  // Try to update 25 GroupContent entities at a time.
+  $ids = array_slice($sandbox['ids'], $sandbox['progress'], 25);
+  $dummy_group = $sandbox['dummy_group'];
+
+  /** @var \Drupal\group\Entity\GroupContentInterface $group_content */
+  foreach ($storage_handler->loadMultiple($ids) as $group_content) {
+    // Delete any group content linked to a deleted group.
+    if (!$group_content->getGroup()) {
+      $group_content->set('gid', $dummy_group);
+      $group_content->save();
+      $sandbox['reassigned']++;
+    }
+    $sandbox['progress']++;
+  }
+
+  // Try to update the percentage but avoid division by zero.
+  $sandbox['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['progress'] / $sandbox['max']);
+
+  // Show a status update for the current progress.
+  return t("Re-assingned @reassigned orphaned GroupContent entities while checking @progress of @max.", [
+    '@progress' => $sandbox['progress'],
+    '@reassigned' => $sandbox['reassigned'],
+    '@max' => $sandbox['max'],
+  ]);
+}
+
+/**
+ * Delete temporary group.
+ */
+function ekan_core_update_9002(&$sandbox) {
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+  $entity_type_manager = \Drupal::service('entity_type.manager');
+  $storage_handler = $entity_type_manager->getStorage('group');
+  foreach ($storage_handler->loadByProperties(['label' => '[[dummy group]]']) as $group) {
+    $group->delete();
+  }
+}
+
+/**
+ * Create dataset .json files for all datasets for POD data.
+ */
+function ekan_core_update_9003(&$sandbox) {
+
+  /** @var \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager */
+  $entity_type_manager = \Drupal::service('entity_type.manager');
+  $storage_handler = $entity_type_manager->getStorage('dataset');
+
+  // Set up the batch by retrieving all the dataset IDs.
+  if (!isset($sandbox['progress'])) {
+    $sandbox['ids'] = $storage_handler->getQuery()->accessCheck(FALSE)->execute();
+    $sandbox['max'] = count($sandbox['ids']);
+    $sandbox['progress'] = 0;
+    $sandbox['resaved'] = 0;
+  }
+
+  // Try to update 25 dataset entities at a time.
+  $ids = array_slice($sandbox['ids'], $sandbox['progress'], 25);
+
+  /** @var \Drupal\ekan_core\Entity\EkanDatasetEntity $dataset */
+  foreach ($storage_handler->loadMultiple($ids) as $dataset) {
+    // Re-save dataset entities.
+    if ($dataset instanceof EkanDatasetEntity) {
+      $dataset->save();
+      $sandbox['resaved']++;
+    }
+    $sandbox['progress']++;
+  }
+
+  // Try to update the percentage but avoid division by zero.
+  $sandbox['#finished'] = empty($sandbox['max']) ? 1 : ($sandbox['progress'] / $sandbox['max']);
+
+  // Show a status update for the current progress.
+  return t("Re-saved @resaved dataset entities while checking @progress of @max.", [
+    '@progress' => $sandbox['progress'],
+    '@resaved' => $sandbox['resaved'],
+    '@max' => $sandbox['max'],
+  ]);
+}
+
+/**
+ * Add the new resource_type field to resources.
+ */
+function ekan_core_update_9004(&$sandbox) {
+
+  // Create the resource_type vocab.
+  Vocabulary::create([
+    'vid' => 'resource_types',
+    'description' => '',
+    'name' => 'Resource Types',
+  ])->save();
+
+  $edum = \Drupal::entityDefinitionUpdateManager();
+
+  $entity_type_id = 'resource';
+  $field_name = 'resource_type';
+  $entity_type = $edum->getEntityType($entity_type_id);
+  $field_defn = EkanResourceEntity::baseFieldDefinitions($entity_type)[$field_name];
+  $edum->installFieldStorageDefinition($field_name, $entity_type_id, $entity_type_id, $field_defn);
+}

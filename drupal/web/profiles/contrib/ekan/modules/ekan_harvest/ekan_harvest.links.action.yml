@@ -1,0 +1,6 @@
+ekan_harvest.add_harvest_source:
+  route_name: entity.harvest_source.add_form
+  title: 'Add Harvest Source'
+  class: Drupal\menu_ui\Plugin\Menu\LocalAction\MenuLinkAdd
+  appears_on:
+    - view.harvest_sources.page_1

@@ -1,0 +1,32 @@
+.cloud-div {
+  width: 60%;
+  margin: 2rem auto;
+}
+.cloud-div > ul {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  line-height: 2.5rem;
+}
+.cloud-div > ul a {
+  color: #720f1b;
+  display: block;
+  font-size: 1.5rem;
+  padding: 0.125rem 0.80rem;
+  text-decoration: none;
+  position: relative;
+  transition: transform .2s;
+  backface-visibility: hidden;
+}
+.cloud-div > ul li:nth-child(2n+1) a { color: #181; }
+.cloud-div > ul li:nth-child(3n+1) a { color: #4b4be1;}
+.cloud-div > ul li:nth-child(4n+1) a { color: #c38; }
+.cloud-div > ul li:nth-child(5n+1) a { color: #0a6b83; font-weight: bold; }
+
+.cloud-div > ul li a:focus,
+.cloud-div > ul li a:hover {
+  transform: scale(1.1);
+}

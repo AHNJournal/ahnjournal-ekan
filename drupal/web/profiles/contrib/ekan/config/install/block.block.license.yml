@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.license
+  module:
+    - facets
+    - system
+  theme:
+    - ekan_theme
+id: license
+theme: ekan_theme
+region: content_left
+weight: -3
+provider: null
+plugin: 'facet_block:license'
+settings:
+  id: 'facet_block:license'
+  label: License
+  label_display: '0'
+  provider: facets
+  block_id: license
+visibility:
+  request_path:
+    id: request_path
+    pages: /search
+    negate: false
+    context_mapping: {  }

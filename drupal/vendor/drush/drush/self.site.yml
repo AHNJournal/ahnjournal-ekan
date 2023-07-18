@@ -1,0 +1,6 @@
+prod:
+  user: dkan
+  database: test_dkan_prod
+  root: /home/DKAN/docroot
+  uri: https://open-neurosecurity.org/collections
+

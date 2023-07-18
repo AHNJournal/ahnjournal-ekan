@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.format
+  module:
+    - facets
+    - system
+  theme:
+    - ekan_theme
+id: format
+theme: ekan_theme
+region: content_left
+weight: -5
+provider: null
+plugin: 'facet_block:format'
+settings:
+  id: 'facet_block:format'
+  label: Format
+  label_display: '0'
+  provider: facets
+  block_id: format
+visibility:
+  request_path:
+    id: request_path
+    pages: /search
+    negate: false
+    context_mapping: {  }

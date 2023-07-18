@@ -1,0 +1,24 @@
+langcode: en
+status: false
+dependencies:
+  config:
+    - views.view.topic
+  module:
+    - views
+  theme:
+    - ekan_theme
+id: views_block__topic_block_1
+theme: ekan_theme
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:topic-block_1'
+settings:
+  id: 'views_block:topic-block_1'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility: {  }

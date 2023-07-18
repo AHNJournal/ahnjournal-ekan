@@ -1,0 +1,107 @@
+id: ekan_dataset
+label: Dataset
+migration_group: ekan
+source:
+  plugin: d7kan_dataset
+  constants:
+    default_text_format: 'full_html'
+process:
+  uuid: uuid
+  uid:
+    -
+      plugin: migration_lookup
+      migration: ekan_user
+      source: node_uid
+    -
+      plugin: default_value
+      default_value: 0
+  title: title
+  created: created
+  changed: changed
+  body/value: body/0/value
+  body/format:
+    plugin: default_value
+    default_value: 'full_html'
+  field_image:
+    plugin: sub_process
+    source: field_image
+    process:
+      alt: alt
+      target_id:
+        plugin: migration_lookup
+        migration: ekan_file
+        source: fid
+  additional_info:
+    plugin: sub_process
+    source: field_additional_info
+    process:
+      key: first
+      value: second
+  related_content:
+    plugin: sub_process
+    source: field_related_content
+    process:
+      uri: url
+      title: title
+  publisher:
+    plugin: migration_lookup
+    migration: ekan_publisher
+    source: og_group_ref
+  topic:
+    plugin: migration_lookup
+    migration: ekan_topic
+    source: field_topic
+  tags:
+    plugin: migration_lookup
+    migration: ekan_tag
+    source: field_tags
+  license: field_license
+  author: field_author
+  spatial/value: field_spatial/0/wkt
+  spatial/geo_type: field_spatial/0/geo_type
+  spatial/lat: field_spatial/0/lat
+  spatial/lon: field_spatial/0/lon
+  spatial_geographical_cover: field_spatial_geographical_cover
+  frequency: field_frequency/0/value
+  temporal_coverage/value: field_temporal_coverage/0/value
+  temporal_coverage/end_value: field_temporal_coverage/0/value2
+  granularity: field_granularity
+  data_dictionary_type: field_data_dictionary_type
+  data_dictionary/value: field_data_dictionary/0/value
+  data_dictionary/format: constants/default_text_format
+  contact_name: field_contact_name
+  contact_email:
+    plugin: callback
+    callable: trim
+    source: field_contact_email/0/value
+  public_access_level: field_public_access_level/0/value
+  rights/value: field_rights/0/value
+  rights/format: constants/default_text_format
+  landing_page/uri: field_landing_page/0/url
+  conforms_to/uri: field_conforms_to/0/url
+  language: field_language/0/value
+  is_part_of/value: field_is_part_of/0/value
+  is_part_of/format: constants/default_text_format
+  pod_theme: field_pod_theme
+  harvest_source_issue:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: field_harvest_source_issued/0/value
+    -
+      plugin: format_date
+      from_format: 'Y-m-d H:i:s'
+      to_format: 'U'
+#  harvest_source_ref:
+  orphan: field_orphan
+
+destination:
+  plugin: entity:dataset
+  validate: true
+
+migration_dependencies:
+  required:
+    - ekan_publisher
+    - ekan_topic
+    - ekan_tag
+    - ekan_user

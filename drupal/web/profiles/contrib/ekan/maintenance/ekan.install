@@ -1,0 +1,460 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for the EKAN profile.
+ */
+
+use Drupal\Core\Site\Settings;
+
+/**
+ * Implements hook_install_tasks().
+ */
+function ekan_install_tasks(&$install_state) {
+  $tasks = [];
+  if (Settings::get('install_default_content', TRUE)) {
+    $tasks['ekan_create_home_page'] = [
+      'display_name' => t('Create home page'),
+      'display' => TRUE,
+      'type' => 'batch',
+    ];
+
+    $tasks['ekan_install_demo_content'] = [
+      'display_name' => t('Install demo content'),
+      'display' => TRUE,
+      'type' => 'batch',
+    ];
+  }
+
+  return $tasks;
+}
+
+/**
+ * Callback to create the default home page node.
+ */
+function ekan_create_home_page(array &$install_state) {
+  if (Settings::get('install_default_content', TRUE)) {
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+    $page = $node_storage->create([
+      'promote' => TRUE,
+      'type' => 'page',
+      'title' => 'Welcome to EKAN',
+      'body' => [[
+        'value' => '<p>EKAN is an open-source data management platform. It treats data as content so that you can easily publish, manage,
+        and maintain your open data no matter the size of your team or the level of technical expertise.</p>',
+        'format' => 'full_html',
+      ],
+      ],
+    ]);
+    $page->save();
+    // About page.
+    $page = $node_storage->create([
+      'promote' => TRUE,
+      'type' => 'page',
+      'title' => 'About',
+      'body' => [[
+        'value' => '<p>EKAN, built by Eighty Options, has been designed specifically to provide a smooth transition for existing DKAN sites to maintain operation after Drupal 7 reaches End-Of-Life. EKAN maintains a user experience consistent with DKAN 1.0 both for unauthenticated end-users and users responsible for content administration.</p>
+<p>Provides an upgrade path for DKAN sites moving to Drupal 9+. </p>
+<ul>
+<li>Allows DKAN sites to maintain operation after Drupal 7 reaches End-Of-Life.</li>
+<li>Maintains a consistent user experience for content maintainers already familiar with managing content within DKAN.</li>
+<li>Integrates data library (e.g. datasets and resources ) and content management (e.g. basic page, story, dashboard) features into a single system, providing an integrated data portal + website platform.</li>
+<li>Maintainable and extensible by website developers familiar with Drupal.</li>
+</ul>
+<h2>Project Homepage</h2>
+<p><a href="https://www.ekan-data.org" rel="nofollow">https://www.ekan-data.org</a></p>
+<h2>Project documentation and roadmap</h2>
+<p><a href="https://docs.google.com/document/d/11FdVRNNSagqZ-E8D48M4-iBShjv15zX3z5yXzqwBKOQ" rel="nofollow">https://docs.google.com/document/d/11FdVRNNSagqZ-E8D48M4-iBShjv15zX3z5yX...</a></p>',
+        'format' => 'full_html',
+      ],
+      ],
+    ]);
+    $page->save();
+  }
+}
+
+/**
+ * Callback for installing demo content.
+ */
+function ekan_install_demo_content(array &$install_state) {
+  // Create taxonomy terms.
+  $term_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+  $menu_link_storage = Drupal::entityTypeManager()->getStorage('menu_link_content');
+  $formatsToCreate = [
+    'arcgis' => ['application/dbase'],
+    'csv' => ['application/csv', 'text/csv'],
+    'data' => [''],
+    'esri rest' => [],
+    'excel' => [],
+    'geojson' => ['application/vnd.geo+json'],
+    'kml' => ['application/vnd.google-earth.kml+xml'],
+    'openxml' => ['application/vnd.openxmlformats'],
+    'pdf' => ['application/pdf'],
+    'rest' => '',
+    'tsv' => ['text/tab-separated-values'],
+    'xls' => [
+      'application/msexcel',
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    ],
+    'zip' => ['application/zip', 'application/gzip'],
+  ];
+  foreach ($formatsToCreate as $mime => $item) {
+    $term_storage->create([
+      'name' => $mime,
+      'vid' => 'format',
+      'field_mime_type' => $item,
+    ])->save();
+  }
+  $tagsToCreate = [
+    'country-afghanistan',
+    'crime',
+    'demographics',
+    'economy',
+    'election',
+    'health',
+    'politics',
+    'price',
+    'public safety',
+    'socioeconomic',
+    'spatial data', 'time-series',
+    'transparency',
+    'United Kingdom',
+    'workforce',
+  ];
+  foreach ($tagsToCreate as $item) {
+    $term_storage->create([
+      'name' => $item,
+      'vid' => 'tags',
+    ])->save();
+  }
+
+  $topicMenu = $menu_link_storage->create([
+    'title' => 'Topics',
+    'link' => ['uri' => 'internal:/'],
+    'menu_name' => 'main',
+  ]);
+  $topicMenu->save();
+
+  $topicsToCreate = [
+    'Transportation' => 'e977',
+    'Education' => 'e97b',
+    'Finance and Budgeting' => 'e97c',
+    'Health Care' => 'e97a',
+    'Public Safety' => 'e978',
+    'City Planning' => 'e979',
+  ];
+
+  foreach ($topicsToCreate as $item => $icon) {
+    $term = $term_storage->create([
+      'name' => $item,
+      'vid' => 'topics',
+      'field_icon_char_code' => $icon,
+    ]);
+    $term->save();
+    $link = '/search?s=&f%5B0%5D=topic%3A' . $term->id();
+    $menu_link = $menu_link_storage->create([
+      'title' => $term->label(),
+      'link' => ['uri' => 'internal:' . $link],
+      'menu_name' => 'main',
+      'parent' => 'menu_link_content:' . $topicMenu->uuid(),
+    ]);
+    $menu_link->save();
+  }
+
+  // Create Menu Links.
+  $links = [
+    'Datasets' => '/search?s=&f%5B0%5D=content_type%3Adataset',
+    'About' => '/about',
+    'Publishers' => '/publishers',
+    'Stories' => '/stories',
+    'Dashboards' => '/search?s=&f%5B0%5D=content_type%3Adata dashboard',
+  ];
+  foreach ($links as $title => $link) {
+    $menu_link_storage->create([
+      'title' => $title,
+      'link' => ['uri' => 'internal:' . $link],
+      'menu_name' => 'main',
+    ])->save();
+  }
+
+  // Get storage object for use later.
+  $nodeStorage = Drupal::entityTypeManager()->getStorage('node');
+  $groupStorage = Drupal::entityTypeManager()->getStorage('group');
+  $taxonomyStorage = Drupal::entityTypeManager()->getStorage('taxonomy_term');
+  $datasetStorage = Drupal::entityTypeManager()->getStorage('dataset');
+  $resourceStorage = Drupal::entityTypeManager()->getStorage('resource');
+
+  // Create a folder for storing the images.
+  if (!file_exists('public://default_content_images')) {
+    mkdir('public://default_content_images');
+  }
+
+  if (!file_exists('public://default_content_files')) {
+    mkdir('public://default_content_files');
+  }
+
+  // ===========================================
+  // ===========  Data Dashboards  =============
+  // ===========================================
+  $demo_content_folder = drupal_get_path('profile', 'ekan') . '/config/demo_content';
+
+  // Read in from json file.
+  $dashboardList = json_decode(file_get_contents($demo_content_folder . '/data_dashboard_list.json'), TRUE);
+
+  foreach ($dashboardList['result'] as $index => $nodeUUID) {
+    $nodeFileContent = file_get_contents($demo_content_folder . '/data_dashboard_show%3Fid=' . $nodeUUID . '.json');
+    $nodeJsonContent = json_decode($nodeFileContent);
+
+    // Build array of topic IDs.
+    $arrayOfTopics = [];
+    foreach ($nodeJsonContent->result->field_topic as $topic) {
+
+      $topicTaxonomy = $taxonomyStorage
+        ->loadByProperties([
+          'vid' => 'topics',
+          'name' => $topic->name,
+        ]);
+      $arrayOfTopics[] = ['target_id' => key($topicTaxonomy)];
+    }
+
+    // Create node and save it.
+    $nodeStorage->create([
+      'title' => $nodeJsonContent->result->title,
+      'type' => 'data_dashboard',
+      'uid' => 1,
+      'body' => $nodeJsonContent->result->body->und[0]->value,
+      'field_topic' => $arrayOfTopics,
+    ])->save();
+  }
+
+  // ===========================================
+  // =============  Data Stories  ==============
+  // ===========================================
+  // Read in from json file.
+  $storyList = json_decode(file_get_contents($demo_content_folder . '/dkan_data_story_list.json'), TRUE);
+
+  foreach ($storyList['result'] as $index => $nodeUUID) {
+    $nodeFileContent = file_get_contents($demo_content_folder . '/dkan_data_story_show%3Fid=' . $nodeUUID . '.json');
+    $nodeJsonContent = json_decode($nodeFileContent);
+
+    // Build array of topic IDs.
+    $arrayOfTopics = [];
+    foreach ($nodeJsonContent->result->field_topic as $topic) {
+
+      $topicTaxonomy = $taxonomyStorage
+        ->loadByProperties([
+          'vid' => 'topics',
+          'name' => $topic->name,
+        ]);
+      $arrayOfTopics[] = ['target_id' => key($topicTaxonomy)];
+    }
+
+    // Create Image and prepare it for the node.
+    $exploded = explode('/', $nodeJsonContent->result->field_image);
+    $filename = end($exploded);
+    $data = file_get_contents($demo_content_folder . '/' . $nodeJsonContent->result->field_image);
+    $file = file_save_data($data, 'public://default_content_images/' . $filename);
+
+    // Create node and save it.
+    $nodeStorage->create([
+      'title' => $nodeJsonContent->result->title,
+      'type' => 'data_story',
+      'uid' => 1,
+
+      'body' => [
+        'value' => strip_tags($nodeJsonContent->result->body->und[0]->value),
+        'format' => 'plain_text',
+        'summary' => $nodeJsonContent->result->body->und[0]->summary,
+      ],
+      'field_topic' => $arrayOfTopics,
+      'field_image' => [
+        'target_id' => $file->id(),
+        'alt' => $nodeJsonContent->result->field_image_alt,
+        'title' => $filename,
+      ],
+    ])->save();
+  }
+
+  // ===========================================
+  // ================  Publishers  =================
+  // ===========================================
+  $groupList = json_decode(file_get_contents($demo_content_folder . '/group_list.json'), TRUE);
+
+  foreach ($groupList['result'] as $index => $uuid) {
+    $nodeFileContent = file_get_contents($demo_content_folder . '/group_show%3Fid=' . $uuid . '.json');
+    $nodeJsonContent = json_decode($nodeFileContent);
+
+    // Create Image and prepare it for the node.
+    $exploded = explode('/', $nodeJsonContent->result->image_display_url);
+    $filename = end($exploded);
+    $data = file_get_contents($demo_content_folder . '/' . $nodeJsonContent->result->image_display_url);
+    $file = file_save_data($data, 'public://default_content_images/' . $filename);
+
+    // Create group and save it.
+    $groupStorage->create([
+      'label' => $nodeJsonContent->result->title,
+      'type' => 'publisher',
+      'field_description' => [
+        'value' => strip_tags($nodeJsonContent->result->description),
+        'format' => 'plain_text',
+      ],
+      'uid' => 1,
+      'field_image' => [
+        'target_id' => $file->id(),
+        'alt' => $nodeJsonContent->result->field_image_alt,
+        'title' => $nodeJsonContent->result->title,
+      ],
+    ])->save();
+  }
+
+  // ===========================================
+  // =============  Dataset  ==============
+  // ===========================================
+  // Read in from json file.
+  $packageList = json_decode(file_get_contents($demo_content_folder . '/package_list.json'), TRUE);
+
+  foreach ($packageList['result'] as $index => $uuid) {
+    $nodeFileContent = file_get_contents($demo_content_folder . '/package_show%3Fid=' . $uuid . '.json');
+    $nodeJsonContent = json_decode($nodeFileContent, 1);
+    $additional_fields = $nodeJsonContent['result']['dkan_additional_fields'];
+
+    // Build array of topic IDs.
+    $arrayOfTopics = [];
+    foreach ($additional_fields['field_topic'] ?? [] as $topic) {
+      $topicTaxonomy = $taxonomyStorage
+        ->loadByProperties([
+          'vid' => 'topics',
+          'name' => $topic['value'],
+        ]);
+      reset($topicTaxonomy);
+      $arrayOfTopics[] = ['target_id' => key($topicTaxonomy)];
+    }
+
+    // Build array of tags IDs.
+    $arrayOfTags = [];
+    foreach ($nodeJsonContent['result']['tags'] ?? [] as $tag) {
+      $tagTaxonomy = $taxonomyStorage
+        ->loadByProperties([
+          'vid' => 'tags',
+          'name' => $tag['name'],
+        ]);
+      $arrayOfTags[] = ['target_id' => key($tagTaxonomy)];
+    }
+
+    // Build array of publisher IDs.
+    $arrayOfPublishers = [];
+    foreach ($nodeJsonContent['result']['groups'] ?? [] as $publisher) {
+      $returnedGroups = $groupStorage
+        ->loadByProperties([
+          'type' => 'publisher',
+          'label' => $publisher['title'],
+        ]);
+      if (count($returnedGroups)) {
+        $arrayOfPublishers[] = ['target_id' => key($returnedGroups)];
+      }
+    }
+
+    // Create node and save it.
+    $licenses = \Drupal::service('ekan_core.license_handler');
+    $field_temporal_coverage = $additional_fields['field_temporal_coverage'];
+    $field_temporal_coverage['end_value'] = $field_temporal_coverage['value2'] ?? NULL;
+    $field_spatial = $additional_fields['field_spatial'];
+    $field_spatial['value'] = $field_spatial['wkt'] ?? NULL;
+    $createdDataset = $datasetStorage->create([
+      'title' => $nodeJsonContent['result']['title'],
+      'type' => 'dataset',
+      'uid' => 1,
+      'topic' => $arrayOfTopics,
+      'tags' => $arrayOfTags,
+      'publisher' => $arrayOfPublishers,
+      'body' => [
+        'value' => $nodeJsonContent['result']['notes'],
+        'format' => 'full_html',
+      ],
+      // 'license' => $nodeJsonContent->result->license_title,
+      'license' => $licenses->getLicenseFromUri($nodeJsonContent['result']['license_title']),
+      'author' => $nodeJsonContent['result']['author'],
+      'Spatial' => $field_spatial,
+      'spatial_geographical_cover' => $additional_fields['field_spatial_geographical_cover'],
+      'frequency' => $additional_fields['field_frequency'],
+      'temporal_coverage' => $field_temporal_coverage,
+      'granularity' => $additional_fields['field_granularity'],
+      'data_dictionary' => $additional_fields['field_data_dictionary'],
+      'contact_name' => $additional_fields['field_contact_name'],
+      'public_access_level' => $additional_fields['field_public_access_level'] ?? NULL,
+      'additional_info' => $additional_fields['field_additional_info'],
+      'related_content' => $additional_fields['field_related_content'],
+      'harvest_source_issue' => $additional_fields['field_harvest_source_issued'],
+      'harvest_source_modified' => $additional_fields['field_harvest_source_modified'],
+    ]);
+
+    $createdDataset->validate();
+    $createdDataset->save();
+
+    // Create Resources and prepare them for the node.
+    foreach ($nodeJsonContent['result']['resources'] as $resourceToAdd) {
+      $resource = $resourceStorage->loadByProperties([
+        'uuid' => $resourceToAdd['id'],
+      ]);
+
+      if (count($resource) == 0) {
+        $exploded = explode('/', $resourceToAdd['url']);
+        $filename = end($exploded);
+
+        $data = file_get_contents($demo_content_folder . '/files/resource/' . $filename);
+        $file = file_save_data($data, 'public://default_content_files/' . $filename);
+
+        $taxonomyReturn = $taxonomyStorage->loadByProperties([
+          'vid' => 'format',
+          'name' => 'csv',
+        ]);
+
+        $taxonomyID = key($taxonomyReturn);
+
+        if (isset($resourceToAdd['resourceType'])) {
+          $resourceTypeTerm = $taxonomyStorage->loadByProperties([
+            'vid' => 'resource_type',
+            'name' => $resourceToAdd['resourceType'],
+          ]);
+
+          if (count($resourceTypeTerm) == 0) {
+            // Create the new resource type term.
+            $resourceTypeTerm = $taxonomyStorage->create([
+              'vid' => 'resource_type',
+              'name' => $resourceToAdd['resourceType'],
+            ]);
+            $resourceTypeTerm->save();
+          }
+          else {
+            $resourceTypeTerm = reset($resourceTypeTerm);
+          }
+        }
+
+        $resourceStorage->create([
+          'uuid' => $resourceToAdd['id'],
+          'title' => $resourceToAdd['name'],
+          'upload' => [
+            'target_id' => $file->id(),
+            'uid' => 1,
+            'display' => 1,
+          ],
+          'resource_format' => $taxonomyID,
+          'resource_type' => $resourceTypeTerm ? $resourceTypeTerm->id() : NULL,
+          'body' => [
+            'value' => $resourceToAdd['description'],
+            'format' => 'full_html',
+          ],
+          'dataset_ref' => [$createdDataset->id()],
+        ])->save();
+      }
+      else {
+        $resourceToUpdate = reset($resource);
+        $resourceToUpdate->dataset_ref[] = [$createdDataset->id()];
+        $resourceToUpdate->save();
+      }
+    }
+  }
+
+  // Attempt to index all the content.
+  search_api_cron();
+}

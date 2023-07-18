@@ -1,0 +1,30 @@
+{% if content %}
+  <div class="resource_content">
+    {% if content.main %}
+      <div {{ region_attributes.main.addClass('resource_body') }}>
+        {{ content.main }}
+      </div>
+    {% endif %}
+  </div>
+
+  <div {{ attributes.addClass('resource-blocks') }}>
+    <div class="left-block col-sm-6">
+      {# resources_info block #}
+      {% if content.resources_info %}
+        <div {{ region_attributes.resources_info.addClass('related-resource') }}>
+          {{ content.resources_info }}
+        </div>
+      {% endif %}
+    </div>
+
+    <div class="right-block col-sm-6">
+      {# additional_info block #}
+      {% if content.additional_info %}
+        <div {{ region_attributes.additional_info.addClass('resource-additional-info') }}>
+          {{ content.additional_info }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+

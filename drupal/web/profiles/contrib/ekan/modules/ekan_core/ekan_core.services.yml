@@ -1,0 +1,26 @@
+services:
+  ekan_core.view.breadcrumb:
+    class: Drupal\ekan_core\Breadcrumb\EkanViewBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 100 }
+
+  ekan_core.entity.breadcrumb:
+    class: Drupal\ekan_core\Breadcrumb\EkanEntityBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 100 }
+
+  ekan_core.icon_handler:
+    class: Drupal\ekan_core\Service\EkanIconHandler
+
+  ekan_core.pod_data_builder:
+    class: Drupal\ekan_core\Service\PodDataJson11Builder
+    arguments: ['@file_system', '@keyvalue']
+
+  ekan_core.license_handler:
+    class: Drupal\ekan_core\Service\EkanLicenseHandler
+
+  file.mime_type.guesser.http:
+    class: Drupal\ekan_core\File\MimeType\HttpMimeTypeGuesser
+    arguments: ['@file_system', '@file.mime_type.guesser.extension']
+    tags:
+      - { name: mime_type_guesser, priority: 10 }

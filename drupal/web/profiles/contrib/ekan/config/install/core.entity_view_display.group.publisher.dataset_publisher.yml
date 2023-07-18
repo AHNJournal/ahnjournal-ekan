@@ -1,0 +1,54 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.group.dataset_publisher
+    - field.field.group.publisher.field_description
+    - field.field.group.publisher.field_image
+    - group.type.publisher
+  module:
+    - image
+    - layout_builder
+    - text
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: group.publisher.dataset_publisher
+targetEntityType: group
+bundle: publisher
+mode: dataset_publisher
+content:
+  field_description:
+    type: text_trimmed
+    weight: 2
+    region: content
+    label: hidden
+    settings:
+      trim_length: 500
+    third_party_settings: {  }
+  field_image:
+    type: image
+    weight: 0
+    region: content
+    label: hidden
+    settings:
+      image_style: ''
+      image_link: ''
+      image_loading:
+        attribute: lazy
+    third_party_settings: {  }
+  label:
+    type: string
+    weight: 1
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: true
+    third_party_settings: {  }
+hidden:
+  changed: true
+  created: true
+  langcode: true
+  search_api_excerpt: true
+  uid: true

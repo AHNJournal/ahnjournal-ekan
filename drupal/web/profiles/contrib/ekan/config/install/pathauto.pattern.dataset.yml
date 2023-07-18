@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_core
+id: dataset
+label: Dataset
+type: 'canonical_entities:dataset'
+pattern: 'dataset/[dataset:title]'
+selection_criteria: {  }
+selection_logic: and
+weight: -7
+relationships: {  }

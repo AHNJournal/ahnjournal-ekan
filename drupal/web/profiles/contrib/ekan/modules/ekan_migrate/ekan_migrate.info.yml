@@ -1,0 +1,9 @@
+name: 'EKAN Migrate'
+type: module
+description: 'Migration config and code for migrating from Drupal 7 DKAN to Drupal 8 EKAN'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'EKAN'
+dependencies:
+  - drupal:migrate_drupal
+  - drupal:migrate_tools

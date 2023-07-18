@@ -1,0 +1,52 @@
+id: ekan_data_story
+label: Data Story
+migration_group: ekan
+source:
+  plugin: d7_node
+  node_type: dkan_data_story
+  constants:
+    default_text_format: 'full_html'
+process:
+  uid:
+    -
+      plugin: migration_lookup
+      migration: ekan_user
+      source: node_uid
+    -
+      plugin: default_value
+      default_value: 0
+  title: title
+  created: created
+  changed: changed
+  body/value:
+    plugin: convert_linebreaks
+    source: body/0/value
+  body/format: constants/default_text_format
+  field_topic:
+    plugin: migration_lookup
+    migration: ekan_topic
+    source: field_topic
+  field_tags:
+    plugin: migration_lookup
+    migration: ekan_tag
+    source: field_tags
+  field_image/target_id:
+    plugin: migration_lookup
+    migration: ekan_file
+    source: field_image/0/fid
+  field_image/title: field_image/0/title
+  field_image/alt: field_image/0/alt
+  created: created
+  changed: changed
+
+destination:
+  plugin: entity:node
+  default_bundle: data_story
+  validate: true
+
+migration_dependencies:
+  required:
+    - ekan_topic
+    - ekan_tag
+    - ekan_file
+    - ekan_user

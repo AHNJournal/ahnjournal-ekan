@@ -1,0 +1,42 @@
+{% if content %}
+  <div {{ attributes.addClass('two-column-dataset dataset_content row') }}>
+    <div class="col-sm-3 dataset_side_menu ">
+      {# publisher_info block #}
+      {% if content.publisher_info %}
+        <div {{ region_attributes.publisher_info.addClass('dataset_publisher_side pane-block') }}>
+          {{ content.publisher_info }}
+        </div>
+      {% endif %}
+
+      {# license block #}
+      {% if content.license %}
+        <div {{ region_attributes.license.addClass('dataset_license_side pane-block') }}>
+          {{ content.license }}
+        </div>
+      {% endif %}
+
+      {# location block #}
+      {% if content.location %}
+      <div {{ region_attributes.location.addClass('dataset_location_side pane-block') }}>
+        {{ content.location }}
+      </div>
+      {% endif %}
+    </div>
+
+    {%
+      set content_classes = [
+      content.publisher_info or content.license ? 'col-sm-9 dataset_main_content',
+      content.publisher_info and content.license is empty ? 'col-sm-12 dataset_main_content'
+    ]
+    %}
+
+    <div {{ content_attributes.addClass(content_classes) }}>
+      {% if content.main %}
+        <div {{ region_attributes.main.addClass('main') }}>
+          {{ content.main }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+{% endif %}
+

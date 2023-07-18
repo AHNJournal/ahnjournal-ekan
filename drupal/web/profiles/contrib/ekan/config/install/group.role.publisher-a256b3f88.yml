@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.publisher
+  enforced:
+    config:
+      - user.role.site_manager
+id: publisher-a256b3f88
+label: 'Site Manager'
+weight: 5
+internal: true
+audience: outsider
+group_type: publisher
+permissions_ui: false
+permissions:
+  - 'create dataset entity'
+  - 'create resource entity'
+  - 'delete any dataset entity'
+  - 'delete any resource entity'
+  - 'delete own dataset entity'
+  - 'delete own resource entity'
+  - 'select group'
+  - 'update any dataset entity'
+  - 'update any resource entity'
+  - 'update own dataset entity'
+  - 'update own resource entity'
+  - 'view any unpublished dataset entity'
+  - 'view any unpublished resource entity'
+  - 'view dataset entity'
+  - 'view resource entity'

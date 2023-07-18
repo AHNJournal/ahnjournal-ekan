@@ -1,0 +1,2 @@
+#!/bin/sh
+/home/ekan/drupal/vendor/drush/drush/drush $@

@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.publisher
+id: publisher-group_content_admin
+label: 'Group Content Admin (can manage all group content)'
+weight: -10
+internal: false
+audience: member
+group_type: publisher
+permissions_ui: true
+permissions:
+  - 'create dataset entity'
+  - 'create resource entity'
+  - 'delete any dataset entity'
+  - 'delete any resource entity'
+  - 'delete own dataset entity'
+  - 'delete own resource entity'
+  - 'select group'
+  - 'update any dataset entity'
+  - 'update any resource entity'
+  - 'update own resource entity'
+  - 'view any unpublished dataset entity'
+  - 'view any unpublished resource entity'
+  - 'view dataset entity'
+  - 'view group'
+  - 'view resource entity'

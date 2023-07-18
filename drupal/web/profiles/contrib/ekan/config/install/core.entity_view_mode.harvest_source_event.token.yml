@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_harvest
+id: harvest_source_event.token
+label: Token
+targetEntityType: harvest_source_event
+cache: true

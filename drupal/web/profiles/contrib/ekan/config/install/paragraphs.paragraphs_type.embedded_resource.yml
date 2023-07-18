@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies: {  }
+id: embedded_resource
+label: 'Embedded Resource'
+icon_uuid: null
+icon_default: null
+description: 'The embedded resource paragraph type is an entity reference field where the user can select a resource.'
+behavior_plugins: {  }

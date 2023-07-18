@@ -1,0 +1,97 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.data_dashboard
+    - node.type.data_story
+    - node.type.page
+    - taxonomy.vocabulary.format
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.topics
+  module:
+    - ekan_core
+    - group
+    - node
+    - path
+    - role_delegation
+    - system
+    - taxonomy
+    - toolbar
+id: site_manager
+label: 'Site Manager'
+weight: -6
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access group overview'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'administer dataset entities'
+  - 'administer menu'
+  - 'administer nodes'
+  - 'administer resource entities'
+  - 'administer taxonomy'
+  - 'administer url aliases'
+  - 'administer users'
+  - 'assign content_creator role'
+  - 'assign editor role'
+  - 'assign site_manager role'
+  - 'bypass group access'
+  - 'create data_dashboard content'
+  - 'create data_story content'
+  - 'create dataset'
+  - 'create group group'
+  - 'create page content'
+  - 'create publisher content'
+  - 'create publisher group'
+  - 'create resource'
+  - 'create terms in format'
+  - 'create terms in tags'
+  - 'create terms in topics'
+  - 'create url aliases'
+  - 'delete all revisions'
+  - 'delete any data_dashboard content'
+  - 'delete any data_story content'
+  - 'delete any dataset'
+  - 'delete any page content'
+  - 'delete any publisher content'
+  - 'delete any resource'
+  - 'delete data_dashboard revisions'
+  - 'delete data_story revisions'
+  - 'delete own data_dashboard content'
+  - 'delete own data_story content'
+  - 'delete own dataset'
+  - 'delete own page content'
+  - 'delete own publisher content'
+  - 'delete own resource'
+  - 'delete page revisions'
+  - 'delete terms in format'
+  - 'delete terms in tags'
+  - 'delete terms in topics'
+  - 'edit any data_dashboard content'
+  - 'edit any data_story content'
+  - 'edit any page content'
+  - 'edit any publisher content'
+  - 'edit own data_dashboard content'
+  - 'edit own data_story content'
+  - 'edit own page content'
+  - 'edit own publisher content'
+  - 'edit terms in format'
+  - 'edit terms in tags'
+  - 'edit terms in topics'
+  - 'revert all revisions'
+  - 'revert data_dashboard revisions'
+  - 'revert data_story revisions'
+  - 'revert page revisions'
+  - 'update any dataset'
+  - 'update any resource'
+  - 'update own dataset'
+  - 'update own resource'
+  - 'view all revisions'
+  - 'view data_dashboard revisions'
+  - 'view data_story revisions'
+  - 'view own unpublished content'
+  - 'view own unpublished dataset'
+  - 'view own unpublished resource'
+  - 'view page revisions'
+  - 'view the administration theme'

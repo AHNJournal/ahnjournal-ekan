@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.embedded_resource.field_resource
+    - paragraphs.paragraphs_type.embedded_resource
+id: paragraph.embedded_resource.default
+targetEntityType: paragraph
+bundle: embedded_resource
+mode: default
+content:
+  field_resource:
+    weight: 0
+    label: hidden
+    settings:
+      link: false
+      view_mode: default
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+    region: content
+hidden:
+  search_api_excerpt: true

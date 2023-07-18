@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.topic
+  module:
+    - facets
+    - system
+  theme:
+    - ekan_theme
+id: topic
+theme: ekan_theme
+region: content_left
+weight: -7
+provider: null
+plugin: 'facet_block:topic'
+settings:
+  id: 'facet_block:topic'
+  label: Topics
+  label_display: '0'
+  provider: facets
+  block_id: topic
+visibility:
+  request_path:
+    id: request_path
+    pages: /search
+    negate: false
+    context_mapping: {  }

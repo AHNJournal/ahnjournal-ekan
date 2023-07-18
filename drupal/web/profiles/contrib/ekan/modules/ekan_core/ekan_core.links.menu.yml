@@ -1,0 +1,22 @@
+dataset.admin.structure.settings:
+  title: 'Dataset settings'
+  description: 'Configure Dataset entities'
+  route_name: dataset.settings
+  parent: system.admin_structure
+
+resource.admin.structure.settings:
+  title: 'Resource settings'
+  description: 'Configure Resource entities'
+  route_name: resource.settings
+  parent: system.admin_structure
+
+dataset.list:
+  title: 'Datasets'
+  route_name: view.datasets.page_1
+  parent: system.admin
+  weight: -11
+
+dataset.create:
+  title: 'Add Dataset'
+  route_name: ekan_core.dataset.step1
+  parent: dataset.list

@@ -1,0 +1,33 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.ekan_featured_topics
+  module:
+    - node
+    - views
+  theme:
+    - ekan_theme
+id: views_block__ekan_featured_topics_block_2
+theme: ekan_theme
+region: content
+weight: 0
+provider: null
+plugin: 'views_block:ekan_featured_topics-block_2'
+settings:
+  id: 'views_block:ekan_featured_topics-block_2'
+  label: ''
+  label_display: '0'
+  provider: views
+  views_label: ''
+  items_per_page: none
+  context_mapping: {  }
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      data_dashboard: data_dashboard
+      data_story: data_story
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

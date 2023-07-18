@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.tags
+  module:
+    - facets
+    - system
+  theme:
+    - ekan_theme
+id: tags
+theme: ekan_theme
+region: content_left
+weight: -6
+provider: null
+plugin: 'facet_block:tags'
+settings:
+  id: 'facet_block:tags'
+  label: Tags
+  label_display: '0'
+  provider: facets
+  block_id: tags
+visibility:
+  request_path:
+    id: request_path
+    pages: /search
+    negate: false
+    context_mapping: {  }

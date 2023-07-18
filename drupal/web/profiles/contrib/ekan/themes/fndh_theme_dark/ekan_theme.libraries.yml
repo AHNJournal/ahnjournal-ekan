@@ -1,0 +1,20 @@
+style:
+  version: VERSION
+  css:
+    theme:
+      assets/css/ekan_theme.style.css: {}
+  js:
+    assets/js/ekan_theme.script.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+bootstrap:
+  version: VERSION
+  css:
+    theme:
+      assets/css/ekan_bootstrap.style.css: {}
+icons:
+  version: VERSION
+  css:
+    theme:
+      assets/css/ekan_icons.style.css: {}

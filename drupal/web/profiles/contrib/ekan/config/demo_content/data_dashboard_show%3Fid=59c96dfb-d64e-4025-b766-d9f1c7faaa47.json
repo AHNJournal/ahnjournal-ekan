@@ -1,0 +1,29 @@
+{
+    "result": {
+        "path": "state-workforce-and-retirement-statistics",
+        "uuid": "59c96dfb-d64e-4025-b766-d9f1c7faaa47",
+        "id": "36",
+        "type": "data_dashboard",
+        "title": "State Workforce and Retirement Statistics",
+        "created": "1472693478",
+        "changed": "1472709475",
+        "body": {
+            "und": [
+                {
+                    "value": "How do changing workforce demographics inform how we budget for a retirement and pension fund or budget and program evaluation?",
+                    "summary": "",
+                    "format": "html",
+                    "safe_value": "<p>How do changing workforce demographics inform how we budget for a retirement and pension fund or budget and program evaluation?</p>\n",
+                    "safe_summary": ""
+                }
+            ]
+        },
+        "field_topic": [
+            {
+                "name": "Finance and Budgeting",
+                "display_name": "Finance and Budgeting",
+                "id": "4ac6d362-6898-4ab8-98f6-ce195657ec4c"
+            }
+        ]
+    }
+}

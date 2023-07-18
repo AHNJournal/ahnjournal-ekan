@@ -1,0 +1,25 @@
+id: ekan_tag
+label: Tag
+migration_group: ekan
+source:
+  plugin: d7_taxonomy_term
+  bundle: tags
+  constants:
+    default_text_format: 'full_html'
+process:
+  name: name
+  description/value: description
+  description/format: constants/default_text_format
+  parent:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: parent
+    -
+      plugin: migration_lookup
+      migration: ekan_tag
+
+destination:
+  plugin: entity:taxonomy_term
+  default_bundle: tags
+  validate: true

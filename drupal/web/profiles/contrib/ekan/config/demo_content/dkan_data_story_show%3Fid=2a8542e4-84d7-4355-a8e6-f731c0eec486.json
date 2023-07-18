@@ -1,0 +1,36 @@
+{
+    "result": {
+        "path": "story/tree-planting-madison-wi-improves-environment-and-quality-life",
+        "uuid": "2a8542e4-84d7-4355-a8e6-f731c0eec486",
+        "id": "34",
+        "type": "dkan_data_story",
+        "title": "Tree-Planting in Madison, WI Improves Environment and Quality of Life",
+        "created": "1472693478",
+        "changed": "1472709443",
+        "body": {
+            "und": [
+                {
+                    "value": "This is the [vision statement](https://www.cityofmadison.com/parks/about/mission.cfm) that appears on the website of the Madison Parks department. Urban forests have been [connected to improved quality of life](https://www.huffingtonpost.com/cornelius-b-murphy-jr-phd/our-urban-forests-improve_b_5413340.html) due to the natural ability of trees to intake harmful carbon dioxide and industrial pollutants as well as provide comfort with shade and space for people to congregate in public spaces. They're also a smart investment for government to reduce pressure from rainfall runoff on their sewer systems. \r\n\r\nMadison, Wisconsin is home to thousands of trees, and it's a core service provided by the government. Madison Parks provides forestry services to not only maintain natural resources in the urban environment but also increase the diversity of native tree species. Improving the overall green space in the city improves the quality of life, enhances public/recreational spaces, and provides opportunities for greater learning about the environment and the heritage of Madison. ",
+                    "summary": "Madison, Wisconsin is home to thousands of trees, and it's a core service provided by the government. Madison Parks provides forestry services to not only maintain natural resources in the urban environment but also increase the diversity of native tree species. Improving the overall green space in the city improves the quality of life, enhances public/recreational spaces, and provides opportunities for greater learning about the environment and the heritage of Madison. ",
+                    "format": "html",
+                    "safe_value": "<p>This is the <a href=\"https://www.cityofmadison.com/parks/about/mission.cfm\">vision statement</a> that appears on the website of the Madison Parks department. Urban forests have been <a href=\"https://www.huffingtonpost.com/cornelius-b-murphy-jr-phd/our-urban-forests-improve_b_5413340.html\">connected to improved quality of life</a> due to the natural ability of trees to intake harmful carbon dioxide and industrial pollutants as well as provide comfort with shade and space for people to congregate in public spaces. They're also a smart investment for government to reduce pressure from rainfall runoff on their sewer systems.</p>\n<p>Madison, Wisconsin is home to thousands of trees, and it's a core service provided by the government. Madison Parks provides forestry services to not only maintain natural resources in the urban environment but also increase the diversity of native tree species. Improving the overall green space in the city improves the quality of life, enhances public/recreational spaces, and provides opportunities for greater learning about the environment and the heritage of Madison.</p>\n",
+                    "safe_summary": "<p>Madison, Wisconsin is home to thousands of trees, and it's a core service provided by the government. Madison Parks provides forestry services to not only maintain natural resources in the urban environment but also increase the diversity of native tree species. Improving the overall green space in the city improves the quality of life, enhances public/recreational spaces, and provides opportunities for greater learning about the environment and the heritage of Madison.</p>\n"
+                }
+            ]
+        },
+        "field_topic": [
+            {
+                "name": "Education",
+                "display_name": "Education",
+                "id": "51f864f8-0a8c-45c0-8ba1-ca588224d289"
+            },
+            {
+                "name": "City Planning",
+                "display_name": "City Planning",
+                "id": "ed451aa0-f7fc-409a-b3be-30a5b7f26751"
+            }
+        ],
+        "field_image": "files/dkan_data_story/madison-347441_960_720.jpg",
+        "field_image_alt": "Madison WI"
+    }
+}

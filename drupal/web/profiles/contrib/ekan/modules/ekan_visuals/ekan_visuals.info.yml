@@ -1,0 +1,10 @@
+name: 'EKAN Visual'
+type: module
+description: 'Ekan Visualization module.'
+core: 8.x
+core_version_requirement: ^8 || ^9
+package: 'EKAN'
+dependencies:
+  - drupal:ekan_core
+  - drupal:text
+

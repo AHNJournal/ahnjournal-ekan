@@ -1,0 +1,10 @@
+.toolbar-icon-dataset-list:before {
+  content: "\E97E" !important;
+  font-family: "DKAN-Topics";
+  font-size: 1.4em;
+  margin-top: 10px;
+}
+.toolbar-icon-dataset-list:active:before,
+.toolbar-icon-dataset-list.is-active:before {
+ font-weight: 200;
+}

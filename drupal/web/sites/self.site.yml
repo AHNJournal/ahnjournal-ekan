@@ -1,0 +1,6 @@
+prod:
+  user: drupal 
+  database: ekan
+  root: /home/ekan/drupal/web
+  uri: https://open-neurosecurity.org/collections
+

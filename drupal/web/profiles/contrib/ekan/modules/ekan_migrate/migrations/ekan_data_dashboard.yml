@@ -1,0 +1,36 @@
+id: ekan_data_dashboard
+label: Data Dashboard
+migration_group: ekan
+source:
+  plugin: d7_node
+  node_type: data_dashboard
+  constants:
+    default_text_format: 'full_html'
+process:
+  uid:
+    -
+      plugin: migration_lookup
+      migration: ekan_user
+      source: node_uid
+    -
+      plugin: default_value
+      default_value: 1
+  title: title
+  created: created
+  changed: changed
+  body/value: body/0/value
+  body/format: constants/default_text_format
+  field_topic:
+    plugin: migration_lookup
+    migration: ekan_topic
+    source: field_topic
+
+destination:
+  plugin: entity:node
+  default_bundle: data_dashboard
+  validate: true
+
+migration_dependencies:
+  required:
+    - ekan_topic
+    - ekan_user

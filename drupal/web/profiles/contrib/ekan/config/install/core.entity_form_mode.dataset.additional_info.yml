@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_core
+id: dataset.additional_info
+label: 'Additional Info'
+targetEntityType: dataset
+cache: true

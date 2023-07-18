@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_core
+id: dataset.token
+label: Token
+targetEntityType: dataset
+cache: true

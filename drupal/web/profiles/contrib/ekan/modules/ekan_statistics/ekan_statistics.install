@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Ekan statistics install file.
+ */
+
+use Drupal\user\Entity\Role;
+
+/**
+ * Assigns the default statistics permission to user.
+ */
+function ekan_statistics_install() {
+  // By default, assign statistics permission to site manager.
+  $role_object = Role::load('site_manager');
+  if ($role_object) {
+    $role_object->grantPermission('view ekan statistics');
+    $role_object->save();
+  }
+}

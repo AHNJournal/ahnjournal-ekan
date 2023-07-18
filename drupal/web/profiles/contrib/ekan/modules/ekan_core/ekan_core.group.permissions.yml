@@ -1,0 +1,3 @@
+select group:
+  title: 'Select Group'
+  description: 'Allow this group to be selected in entity reference selections.'

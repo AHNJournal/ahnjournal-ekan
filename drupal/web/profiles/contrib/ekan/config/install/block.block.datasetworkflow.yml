@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_core
+  theme:
+    - ekan_theme
+id: datasetworkflow
+theme: ekan_theme
+region: content
+weight: -9
+provider: null
+plugin: dataset_workflow
+settings:
+  id: dataset_workflow
+  label: 'Dataset Workflow'
+  label_display: '0'
+  provider: ekan_core
+visibility: {  }

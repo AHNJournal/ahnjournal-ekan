@@ -1,0 +1,35 @@
+ekan_statistics.dashboard:
+  route_name: ekan_statistics.dashboard
+  title: 'Dashboard'
+  base_route: ekan_statistics.dashboard
+  weight: 1
+
+ekan_statistics.topics:
+  route_name: ekan_statistics.topics
+  base_route: ekan_statistics.dashboard
+  title: 'Topics'
+  weight: 5
+
+ekan_statistics.tags:
+  route_name: ekan_statistics.tags
+  base_route: ekan_statistics.dashboard
+  title: 'Tags'
+  weight: 10
+
+ekan_statistics.formats:
+  route_name: ekan_statistics.formats
+  base_route: ekan_statistics.dashboard
+  title: 'Formats'
+  weight: 15
+
+ekan_statistics.groups:
+  route_name: ekan_statistics.groups
+  base_route: ekan_statistics.dashboard
+  title: 'Groups'
+  weight: 20
+
+ekan_statistics.harvesters:
+  route_name: ekan_statistics.harvesters
+  base_route: ekan_statistics.dashboard
+  title: 'Harvesters'
+  weight: 25

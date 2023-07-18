@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_core
+    - system
+id: anonymous
+label: 'Anonymous user'
+weight: -10
+is_admin: false
+permissions:
+  - 'access content'
+  - 'view dataset'
+  - 'view resource'

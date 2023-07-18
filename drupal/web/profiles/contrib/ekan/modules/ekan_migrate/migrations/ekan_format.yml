@@ -1,0 +1,70 @@
+id: ekan_format
+label: Format
+migration_group: ekan
+source:
+  plugin: d7_taxonomy_term
+  bundle: format
+  constants:
+    default_text_format: 'full_html'
+process:
+  uid:
+    -
+      plugin: migration_lookup
+      migration: ekan_user
+      source: node_uid
+    -
+      plugin: default_value
+      default_value: 0
+  name:
+    plugin: skip_on_empty
+    method: row
+    source: name
+  field_mime_type:
+    plugin: static_map
+    source: name
+    map:
+      'arcgis': 'application/dbase'
+      'csv':
+         - 'application/csv'
+         - 'text/csv'
+      'data': ''
+      'esri rest': []
+      'excel': []
+      'geojson': 'application/vnd.geo+json'
+      'kml': 'application/vnd.google-earth.kml+xml'
+      'openxml': 'application/vnd.openxmlformats'
+      'pdf': 'application/pdf'
+      'rest': ''
+      'tsv': 'text/tab-separated-values'
+      'xls':
+        - 'application/msexcel'
+        - 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+      'xlsx':
+        - 'application/msexcel'
+        - 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'  
+      'zip':
+        - 'application/zip'
+        - 'application/gzip'
+    bypass: TRUE
+    
+  description/value: description
+  description/format: constants/default_text_format
+  parent:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: parent
+    -
+      plugin: migration_lookup
+      migration: ekan_topic
+
+destination:
+  plugin: entity:taxonomy_term
+  default_bundle: format
+  validate: true
+
+migration_dependencies:
+  required:
+    - ekan_user
+
+

@@ -1,0 +1,19 @@
+ekan/pdfjs:
+  dependencies:
+    - pdf/mozilla.pdf.js
+  js:
+    js/pdf.js: {}
+
+detectformat:
+  js:
+    js/detectformat.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+menuicons:
+  css:
+    theme:
+      css/menu-icons.css: {}
+  dependencies:
+    - ekan_theme/style

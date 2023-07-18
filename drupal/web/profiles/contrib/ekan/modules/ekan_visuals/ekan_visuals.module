@@ -1,0 +1,86 @@
+<?php
+
+/**
+ * @file
+ * Ekan visuals .module file.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function ekan_visuals_entity_base_field_info(EntityTypeInterface $entity_type) {
+  // Add Visualisation field to resource.
+  if ($entity_type->id() == 'resource') {
+
+    // Field Visualisation.
+    $fields['visualisation'] = BaseFieldDefinition::create('string_long')
+      ->setRevisionable(FALSE)
+      ->setTranslatable(FALSE)
+      ->setRequired(FALSE)
+      ->setLabel(t('Visualisation'))
+      ->setCardinality(1)
+      ->setDisplayOptions('view', [
+        'label' => 'hidden',
+        'type' => 'visualisation_formatter',
+        'weight' => 4,
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'visualisation_select',
+        'weight' => 4,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    return $fields;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ekan_visuals_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'resource_edit_form' || $form_id == 'resource_form') {
+    $term_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+    $term_ids = \Drupal::entityQuery('taxonomy_term')
+      ->condition('vid', 'format')
+      ->execute();
+    $resource_formats = [];
+    $terms = $term_storage->loadMultiple($term_ids);
+    foreach ($terms as $term) {
+      $resource_formats[] = [
+        'name' => str_replace(' ', '-', $term->label()),
+        'id' => $term->id(),
+      ];
+    }
+    /** @var \Drupal\ekan_visuals\EkanVisualisationManager $plugin_manager */
+    $plugin_manager = \Drupal::service('plugin.manager.ekan_visualisation');
+    $definitions = $plugin_manager->getDefinitions();
+    $plugin_ids = [];
+    foreach ($definitions as $definition) {
+      $plugin_ids[] = $definition['id'];
+    }
+    $form['resource_format']['#attached']['library'][] = 'ekan_visuals/show-visualisation-options';
+    $form['resource_format']['#attached']['drupalSettings']['ekan_visuals']['resource_formats'] = $resource_formats;
+    $form['resource_format']['#attached']['drupalSettings']['ekan_visuals']['plugin_ids'] = $plugin_ids;
+  }
+}
+
+/**
+ * Implements hook_views_pre_render().
+ */
+function ekan_visuals_views_pre_render(ViewExecutable $view) {
+  if (isset($view) && ($view->id() == 'data_and_resource') && $view->current_display == 'block_1') {
+    $ids = [];
+    foreach ($view->result as $row) {
+      $ids[] = $row->id;
+    }
+    // Add a preview toggle library to the view.
+    $view->element['#attached']['library'][] = 'ekan_visuals/resource-preview-toggle';
+    $view->element['#attached']['drupalSettings']['resource_view']['resource_ids'] = $ids;
+  }
+}

@@ -1,0 +1,23 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.publisher
+id: publisher-member
+label: Member
+weight: -100
+internal: true
+audience: member
+group_type: publisher
+permissions_ui: true
+permissions:
+  - 'create dataset entity'
+  - 'create resource entity'
+  - 'delete own dataset entity'
+  - 'delete own resource entity'
+  - 'select group'
+  - 'update own dataset entity'
+  - 'update own resource entity'
+  - 'view dataset entity'
+  - 'view group'
+  - 'view resource entity'

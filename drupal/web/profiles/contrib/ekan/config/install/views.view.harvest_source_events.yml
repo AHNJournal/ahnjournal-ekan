@@ -1,0 +1,383 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_harvest
+id: harvest_source_events
+label: 'Harvest Source Events'
+module: views
+description: ''
+tag: ''
+base_table: harvest_source_event
+base_field: id
+display:
+  default:
+    display_plugin: default
+    id: default
+    display_title: Master
+    position: 0
+    display_options:
+      access:
+        type: none
+        options: {  }
+      cache:
+        type: tag
+        options: {  }
+      query:
+        type: views_query
+        options:
+          disable_sql_rewrite: false
+          distinct: false
+          replica: false
+          query_comment: ''
+          query_tags: {  }
+      exposed_form:
+        type: basic
+        options:
+          submit_button: Apply
+          reset_button: false
+          reset_button_label: Reset
+          exposed_sorts_label: 'Sort by'
+          expose_sort_order: true
+          sort_asc_label: Asc
+          sort_desc_label: Desc
+      pager:
+        type: mini
+        options:
+          items_per_page: 10
+          offset: 0
+          id: 0
+          total_pages: null
+          expose:
+            items_per_page: false
+            items_per_page_label: 'Items per page'
+            items_per_page_options: '5, 10, 25, 50'
+            items_per_page_options_all: false
+            items_per_page_options_all_label: '- All -'
+            offset: false
+            offset_label: Offset
+          tags:
+            previous: ‹‹
+            next: ››
+      style:
+        type: table
+        options:
+          grouping: {  }
+          row_class: ''
+          default_row_class: true
+          override: true
+          sticky: false
+          caption: ''
+          summary: ''
+          description: ''
+          columns:
+            id: id
+            timestamp: timestamp
+            status: status
+            created: created
+            updated: updated
+            failed: failed
+            unchanged: unchanged
+            orphaned: orphaned
+            duration: duration
+          info:
+            id:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            timestamp:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            status:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            created:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            updated:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            failed:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            unchanged:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            orphaned:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+            duration:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
+          default: '-1'
+          empty_table: false
+      row:
+        type: fields
+        options:
+          inline: {  }
+          separator: ''
+          hide_empty: false
+          default_field_elements: true
+      fields:
+        id:
+          id: id
+          table: harvest_source_event
+          field: id
+          entity_type: harvest_source_event
+          entity_field: id
+          plugin_id: field
+        migration_id:
+          id: migration_id
+          table: harvest_source_event
+          field: migration_id
+          entity_type: harvest_source_event
+          entity_field: migration_id
+          plugin_id: field
+        timestamp:
+          id: timestamp
+          table: harvest_source_event
+          field: timestamp
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Timestamp Started'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: timestamp
+          settings:
+            date_format: html_datetime
+            custom_date_format: ''
+            timezone: ''
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: harvest_source_event
+          entity_field: timestamp
+          plugin_id: field
+        status:
+          id: status
+          table: harvest_source_event
+          field: status
+          entity_type: harvest_source_event
+          entity_field: status
+          plugin_id: field
+        created:
+          id: created
+          table: harvest_source_event
+          field: created
+          entity_type: harvest_source_event
+          entity_field: created
+          plugin_id: field
+        updated:
+          id: updated
+          table: harvest_source_event
+          field: updated
+          entity_type: harvest_source_event
+          entity_field: updated
+          plugin_id: field
+        failed:
+          id: failed
+          table: harvest_source_event
+          field: failed
+          entity_type: harvest_source_event
+          entity_field: failed
+          plugin_id: field
+        unchanged:
+          id: unchanged
+          table: harvest_source_event
+          field: unchanged
+          entity_type: harvest_source_event
+          entity_field: unchanged
+          plugin_id: field
+        orphaned:
+          id: orphaned
+          table: harvest_source_event
+          field: orphaned
+          entity_type: harvest_source_event
+          entity_field: orphaned
+          plugin_id: field
+        duration:
+          id: duration
+          table: harvest_source_event
+          field: duration
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: 'Duration (seconds)'
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: .
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: harvest_source_event
+          entity_field: duration
+          plugin_id: field
+      filters: {  }
+      sorts:
+        id:
+          id: id
+          table: harvest_source_event
+          field: id
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: DESC
+          exposed: false
+          expose:
+            label: ''
+            field_identifier: id
+          entity_type: harvest_source_event
+          entity_field: id
+          plugin_id: standard
+      header: {  }
+      footer: {  }
+      empty: {  }
+      relationships: {  }
+      arguments:
+        harvest_source_id:
+          id: harvest_source_id
+          table: harvest_source_event
+          field: harvest_source_id
+          entity_type: harvest_source_event
+          entity_field: harvest_source_id
+          plugin_id: numeric
+      display_extenders: {  }
+    cache_metadata:
+      max-age: -1
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+      tags: {  }

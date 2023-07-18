@@ -1,0 +1,29 @@
+{
+    "result": {
+        "path": "crime-americas-top-10-most-populous-cities",
+        "uuid": "e3fa4177-f077-46d7-8f38-5df574492d70",
+        "id": "38",
+        "type": "data_dashboard",
+        "title": "Crime in America's Top 10 Most Populous Cities",
+        "created": "1472693478",
+        "changed": "1472709464",
+        "body": {
+            "und": [
+                {
+                    "value": "How are crime rates and types represented appropriately when comparing major metropolitan cities?",
+                    "summary": "",
+                    "format": "html",
+                    "safe_value": "<p>How are crime rates and types represented appropriately when comparing major metropolitan cities?</p>\n",
+                    "safe_summary": ""
+                }
+            ]
+        },
+        "field_topic": [
+            {
+                "name": "Public Safety",
+                "display_name": "Public Safety",
+                "id": "916a5b0d-d4f9-489d-a3a0-30c5cdfd0261"
+            }
+        ]
+    }
+}

@@ -1,0 +1,493 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - views.view.data_and_resource
+    - views.view.dataset_field_info
+    - views.view.tags
+    - views.view.topic
+  module:
+    - datetime_range
+    - ekan_core
+    - geofield
+    - key_value_field
+    - layout_builder
+    - link
+    - options
+    - text
+    - user
+    - views
+  theme:
+    - ekan_theme
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: true
+    sections:
+      -
+        layout_id: two_column_dataset
+        layout_settings:
+          label: dataset_section
+        components:
+          8291bfd2-a300-46d1-a132-a68643675b27:
+            uuid: 8291bfd2-a300-46d1-a132-a68643675b27
+            region: license
+            configuration:
+              id: 'field_block:dataset:dataset:license'
+              label: License
+              provider: layout_builder
+              label_display: visible
+              formatter:
+                label: hidden
+                type: string
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 0
+            additional: {  }
+          8bfe4feb-5a2b-47e8-bbb6-afb0dc57cd0d:
+            uuid: 8bfe4feb-5a2b-47e8-bbb6-afb0dc57cd0d
+            region: main
+            configuration:
+              id: 'field_block:dataset:dataset:title'
+              label: Title
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: string
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 0
+            additional: {  }
+          bfaef899-ed7b-49cd-98e4-199731bce5ff:
+            uuid: bfaef899-ed7b-49cd-98e4-199731bce5ff
+            region: main
+            configuration:
+              id: 'field_block:dataset:dataset:body'
+              label: Description
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: text_default
+                settings: {  }
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 3
+            additional: {  }
+          5290c2ea-9173-4603-9263-678b69461348:
+            uuid: 5290c2ea-9173-4603-9263-678b69461348
+            region: main
+            configuration:
+              id: 'views_block:data_and_resource-block_1'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            weight: 4
+            additional: {  }
+          70a7c786-8dab-4e5e-ac9e-36a1af1d2ab8:
+            uuid: 70a7c786-8dab-4e5e-ac9e-36a1af1d2ab8
+            region: main
+            configuration:
+              id: 'views_block:topic-block_1'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            weight: 2
+            additional: {  }
+          67e89906-9d34-4d27-b9a6-2a3e10c4228d:
+            uuid: 67e89906-9d34-4d27-b9a6-2a3e10c4228d
+            region: main
+            configuration:
+              id: 'views_block:tags-block_1'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            weight: 5
+            additional: {  }
+          cefeed9b-c263-45a2-ab7c-b05d0ebebb03:
+            uuid: cefeed9b-c263-45a2-ab7c-b05d0ebebb03
+            region: main
+            configuration:
+              id: 'views_block:dataset_field_info-block_1'
+              label: ''
+              provider: views
+              label_display: '0'
+              views_label: ''
+              items_per_page: none
+              context_mapping: {  }
+            weight: 6
+            additional: {  }
+          b488b089-382f-40e5-9913-6ae552b9e84d:
+            uuid: b488b089-382f-40e5-9913-6ae552b9e84d
+            region: main
+            configuration:
+              id: 'field_block:dataset:dataset:related_content'
+              label: 'Related Content'
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: above
+                type: link
+                settings:
+                  trim_length: 80
+                  url_only: false
+                  url_plain: false
+                  rel: '0'
+                  target: '0'
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 7
+            additional: {  }
+          435e0381-f034-457c-adc5-6a16057246b2:
+            uuid: 435e0381-f034-457c-adc5-6a16057246b2
+            region: publisher_info
+            configuration:
+              id: 'field_block:dataset:dataset:publisher'
+              label: Publisher
+              provider: layout_builder
+              label_display: '0'
+              formatter:
+                label: hidden
+                type: entity_reference_entity_view
+                settings:
+                  view_mode: dataset_publisher
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 4
+            additional: {  }
+          345df65b-a1b3-4e36-b275-29abb440f526:
+            uuid: 345df65b-a1b3-4e36-b275-29abb440f526
+            region: location
+            configuration:
+              id: 'field_block:dataset:dataset:spatial'
+              label: Spatial
+              provider: layout_builder
+              label_display: visible
+              formatter:
+                label: hidden
+                type: leaflet_formatter_default
+                settings:
+                  multiple_map: false
+                  popup: false
+                  popup_content: ''
+                  leaflet_map: 'OSM Mapnik'
+                  height: 400
+                  height_unit: px
+                  hide_empty_map: true
+                  disable_wheel: false
+                  fullscreen_control: false
+                  gesture_handling: false
+                  reset_map:
+                    control: false
+                    position: topright
+                  map_position:
+                    force: false
+                    center:
+                      lat: !!float 0
+                      lon: !!float 0
+                    zoom: 12
+                    minZoom: 1
+                    maxZoom: 18
+                    zoomFiner: 0
+                  weight: ''
+                  icon:
+                    iconType: marker
+                    iconUrl: ''
+                    shadowUrl: ''
+                    className: ''
+                    html: '<div></div>'
+                    html_class: leaflet-map-divicon
+                    circle_marker_options: '{"radius":100,"color":"red","fillColor":"#f03","fillOpacity":0.5}'
+                    iconSize:
+                      x: ''
+                      'y': ''
+                    iconAnchor:
+                      x: ''
+                      'y': ''
+                    shadowSize:
+                      x: ''
+                      'y': ''
+                    shadowAnchor:
+                      x: ''
+                      'y': ''
+                    popupAnchor:
+                      x: ''
+                      'y': ''
+                  path: '{"color":"#3388ff","opacity":"1.0","stroke":true,"weight":3,"fill":"depends","fillColor":"*","fillOpacity":"0.2","radius":"6"}'
+                third_party_settings: {  }
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+            weight: 0
+            additional: {  }
+        third_party_settings: {  }
+id: dataset.dataset.default
+targetEntityType: dataset
+bundle: dataset
+mode: default
+content:
+  Spatial:
+    type: geofield_latlon
+    weight: 9
+    region: content
+    label: above
+    settings:
+      output_format: decimal
+    third_party_settings: {  }
+  additional_info:
+    label: inline
+    type: key_value
+    region: content
+    weight: 20
+    settings:
+      value_only: false
+    third_party_settings: {  }
+  author:
+    type: string
+    weight: 8
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  body:
+    label: hidden
+    type: text_default
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  conforms_to:
+    label: inline
+    type: link_separate
+    weight: 3
+    region: content
+    settings:
+      trim_length: 80
+      rel: ''
+      target: ''
+      url_only: false
+      url_plain: false
+    third_party_settings: {  }
+  contact_name:
+    type: string
+    weight: 17
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  data_dictionary:
+    label: inline
+    type: text_default
+    weight: 14
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  data_dictionary_type:
+    type: string
+    weight: 12
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  granularity:
+    type: string
+    weight: 13
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  harvest_source_issue:
+    label: inline
+    type: timestamp
+    settings:
+      date_format: medium
+      custom_date_format: ''
+      timezone: ''
+    weight: 21
+    region: content
+    third_party_settings: {  }
+  harvest_source_modified:
+    type: text_default
+    weight: 15
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  harvest_source_ref:
+    label: inline
+    type: entity_reference_entity_id
+    region: content
+    weight: 22
+    settings: {  }
+    third_party_settings: {  }
+  is_part_of:
+    type: string
+    weight: 18
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  landing_page:
+    label: hidden
+    type: link_separate
+    weight: 4
+    region: content
+    settings:
+      trim_length: 80
+      rel: ''
+      target: ''
+      url_only: false
+      url_plain: false
+    third_party_settings: {  }
+  language:
+    type: list_default
+    weight: 25
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  license:
+    type: string
+    weight: 7
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  pod_theme:
+    type: string
+    weight: 16
+    region: content
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  public_access_level:
+    type: list_default
+    weight: 24
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  publisher:
+    label: inline
+    type: entity_reference_label
+    region: content
+    weight: 1
+    settings:
+      link: true
+    third_party_settings: {  }
+  related_content:
+    label: inline
+    type: link_separate
+    weight: 2
+    region: content
+    settings:
+      trim_length: 80
+      rel: ''
+      target: ''
+      url_only: false
+      url_plain: false
+    third_party_settings: {  }
+  rights:
+    type: text_default
+    weight: 19
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  spatial:
+    type: geofield_default
+    weight: 6
+    region: content
+    label: hidden
+    settings:
+      output_format: geojson
+      output_escape: true
+    third_party_settings: {  }
+  spatial_geographical_cover:
+    type: string
+    weight: 10
+    region: content
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+  tags:
+    label: hidden
+    type: entity_reference_label
+    region: content
+    weight: 6
+    settings:
+      link: true
+    third_party_settings: {  }
+  temporal_coverage:
+    type: daterange_default
+    weight: 11
+    region: content
+    label: above
+    settings:
+      separator: '-'
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+  topic:
+    label: hidden
+    type: entity_reference_label
+    region: content
+    weight: 5
+    settings:
+      link: true
+    third_party_settings: {  }
+  uid:
+    label: hidden
+    type: author
+    weight: 23
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  user_id:
+    label: hidden
+    type: author
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  contact_email: true
+  frequency: true
+  langcode: true
+  layout_builder__layout: true
+  modified_date: true
+  orphan: true
+  release_date: true
+  search_api_excerpt: true

@@ -1,0 +1,33 @@
+.publisher-content {
+  display: block;
+  column-count: 3;
+
+  @media #{$tablet} {
+    column-count: auto;
+  }
+
+  .views-row {
+    .views-field-field-image {
+      img {
+        margin: auto;
+        display: block;
+      }
+    }
+
+    .views-field-label {
+      margin: 2em 0 1.75rem 0;
+
+      h2 {
+        font-size: 1.5em;
+      }
+    }
+
+    .views-field-field-description {
+      line-height: 2em;
+    }
+
+    @media #{$tablet} {
+      margin-bottom: 40px;
+    }
+  }
+}

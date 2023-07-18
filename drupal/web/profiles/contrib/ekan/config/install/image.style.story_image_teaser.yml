@@ -1,0 +1,14 @@
+langcode: en
+status: true
+dependencies: {  }
+name: story_image_teaser
+label: 'Story Image - Teaser'
+effects:
+  3d4ff960-f85a-4708-a7fc-473bd315bafe:
+    uuid: 3d4ff960-f85a-4708-a7fc-473bd315bafe
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 640
+      height: 300
+      anchor: center-center

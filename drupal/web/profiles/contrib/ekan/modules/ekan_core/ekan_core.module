@@ -1,0 +1,285 @@
+<?php
+
+/**
+ * @file
+ * Ekan_core.module file.
+ */
+
+use Drupal\Core\Database\Query\SelectInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\ekan_core\Entity\EkanResourceEntity;
+use Drupal\facets\FacetInterface;
+use Drupal\group\Entity\GroupContentInterface;
+use Drupal\Core\Entity\ContentEntityFormInterface;
+use Drupal\Core\Cache\RefinableCacheableDependencyInterface;
+use Drupal\ekan_core\Entity\EkanDatasetEntity;
+use Drupal\group\Entity\GroupInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_entity_base_field_info_alter().
+ *
+ * Applies any configuration made via the ResourceEntitySettingsForm.
+ */
+function ekan_core_entity_base_field_info_alter(&$fields, EntityTypeInterface $entity_type) {
+  if ($entity_type->id() == 'resource') {
+    $resource_settings = \Drupal::config('ekan_core.resource_settings');
+    $fields['upload']->setSettings($resource_settings->get('upload') ?: EkanResourceEntity::DEFAULT_UPLOAD_SETTINGS);
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function ekan_core_theme() {
+  $theme = [
+    'home_page' => [
+      'variables' => [
+        'title' => 'Welcome to EKAN',
+        'body' => 'No content promoted to front page',
+        'read_more_link' => NULL,
+      ],
+    ],
+    'file_pdf' => [
+      'variables' => [
+        'attributes' => NULL,
+      ],
+    ],
+  ];
+
+  return $theme;
+}
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function ekan_core_views_data_alter(array &$data) {
+
+  // Set a custom field handler which links topics and tags on these aggregate
+  // fields.
+  if (isset($data['search_api_index_ekan_index']['topic'])) {
+    $data['search_api_index_ekan_index']['topic']['field']['id'] = 'search_api_ekan_aggregate_reference';
+    $data['search_api_index_ekan_index']['topic']['field']['reference_entity_type'] = 'taxonomy_term';
+  }
+
+  if (isset($data['search_api_index_ekan_index']['tags'])) {
+    $data['search_api_index_ekan_index']['tags']['field']['id'] = 'search_api_ekan_aggregate_reference';
+    $data['search_api_index_ekan_index']['tags']['field']['reference_entity_type'] = 'taxonomy_term';
+  }
+  $data['groups']['manage_members'] = [
+    'title' => t('Manage members link'),
+    'group' => t('Group'),
+    'field' => [
+      'title' => t('Manage Members link'),
+      'help' => t('This will provide manage members link.'),
+      'id' => 'manage_members_link',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for facets_result_item.html.twig.
+ */
+function ekan_core_preprocess_facets_result_item(&$variables) {
+  // Change the content type facet to look a bit nicer.
+  if ($variables['facet'] instanceof FacetInterface && $variables['facet']->id() == 'content_type') {
+    $variables['value'] = ucwords($variables['value']);
+  }
+}
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function ekan_core_entity_type_alter(array &$entity_types) {
+  // For some reason, form_view_modes don't work like display modes.
+  // https://www.webomelette.com/render-custom-entity-form-modes-programatically-drupal-8
+  // We get all form modes, for all entities, and loop through them.
+  $form_modes = \Drupal::service('entity_display.repository')
+    ->getAllFormModes();
+  foreach ($form_modes as $entity_type => $display_modes) {
+
+    $entity_id = $entity_types[$entity_type];
+    $ignore = ['default', 'edit', 'delete'];
+    foreach ($display_modes as $machine_name => $form_display) {
+      if (in_array($machine_name, $ignore)) {
+        // We are only interested in adding non-default display modes.
+        continue;
+      }
+      // We get the default handler class. It will be enough for us.
+      $default_handler_class = $entity_id->getHandlerClasses()['form']['default'];
+      // We set the form class, keyed by the machine name of our custom form
+      // mode.
+      $entity_id->setFormClass($machine_name, $default_handler_class);
+    }
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ekan_core_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // On group membership create or edit forms.
+  if (preg_match('/^group_content_(?<group_type>.+)-group_membership_(?<op>.+)_form$/', $form_id, $matches)) {
+    $form_object = $form_state->getFormObject();
+    assert($form_object instanceof ContentEntityFormInterface);
+    $membership = $form_object->getEntity();
+    assert($membership instanceof GroupContentInterface);
+    $group = $membership->getGroup();
+    $user = $membership->getEntity();
+
+    if ($matches['op'] == 'add') {
+      $form['#title'] = t('Add member to group %group_name', ['%group_name' => $group->label()]);
+    }
+    if ($matches['op'] == 'edit') {
+      $tvars = ['%group_name' => $group->label(), '%user' => $user->label()];
+      $form['#title'] = t('Edit group membership user %user within group %group_name', $tvars);
+    }
+    if ($matches['op'] == 'delete') {
+      $tvars = ['%group_name' => $group->label(), '%user' => $user->label()];
+      $form['#title'] = t('Are you sure you want to remove user %user from group %group_name?', $tvars);
+    }
+  }
+
+  if ($form_id == 'views_exposed_form') {
+    if ($form['#id'] == "views-exposed-form-search-box-page-1") {
+      // Redirect the search form box to search page.
+      $form['#action'] = '/search';
+
+      // Change the Search text to icon.
+      $form['views_exposed_form']['#attributes']['placeholder'][] = t('Search');
+      $form['actions']['submit']['#value'] = html_entity_decode('&#xf002;');
+    }
+
+  }
+
+  if ($form_id == 'user_register_form') {
+    $form['account']['roles']['#title'] = t('Global Roles');
+    $form['account']['roles']['#description'] = t('Content Creator: Can manage datasets and resources in any group and create non-grouped content such as data stories and dashboards.<br/>Site Manager: Can manage content of all types, create new user accounts and assign users to groups.');
+  }
+}
+
+/**
+ * Implements hook_menu_local_tasks_alter().
+ */
+function ekan_core_menu_local_tasks_alter(&$data, $route_name, RefinableCacheableDependencyInterface &$cacheability) {
+  /** @var \Drupal\ekan_core\Entity\EkanResourceEntity $resource */
+  $resource = Drupal::routeMatch()->getParameter('resource');
+  if ($resource) {
+    // Only show go to resource tab or download tab based
+    // on resource field 'upload' or 'link_api' value.
+    $fid = $resource->get('upload')->target_id;
+    $api_link = $resource->get('link_api')->uri;
+    $remote_link = $resource->get('link_remote_file')->value;
+    if ($fid) {
+      unset($data['tabs'][0]['entity.resource.api_link']);
+    }
+    if ($api_link || $remote_link) {
+      unset($data['tabs'][0]['entity.resource.download_file']);
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_hook().
+ */
+function ekan_core_preprocess_group(&$variable) {
+  /** @var \Drupal\ekan_core\Entity\EkanResourceEntity $resource */
+  $dataset = Drupal::routeMatch()->getParameter('dataset');
+  if ($dataset instanceof EkanDatasetEntity) {
+    $variable['page'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_query_TAG_alter().
+ */
+function ekan_core_query_ekan_grouped_distinct_alter(SelectInterface $query) {
+  // The groups module will cause some views to duplicate rows because of the
+  // way it left joins in the group_content_field_data table. Forcing the query
+  // to be distinct fixes it (setting "Distinct" in the view options does not
+  // solve it).
+  $query->distinct(TRUE);
+}
+
+/**
+ * Implements hook_toolbar_alter().
+ */
+function ekan_core_toolbar_alter(&$items) {
+  $items['administration']['#attached']['library'][] = 'ekan_core/menuicons';
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_delete().
+ */
+function ekan_core_group_delete(EntityInterface $entity) {
+  assert($entity instanceof GroupInterface);
+  // We need to delete group contents when deleting groups.
+  // The groups module does do this, but it does it in Group::preDelete which
+  // then deletes group content, but also re-saves the content entities. This
+  // means that EkanEntityGroupSynchronised::groupSynchronise re-creates group
+  // relationships based on the publishers which haven't /quite/ been deleted
+  // yet.
+  //
+  // See GroupContent::postDelete() and  https://www.drupal.org/node/2754399.
+  //
+  // So we re-delete the group content entities in this delete hook.
+  foreach ($entity->getContent() as $group_content) {
+    $group_content->delete();
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function ekan_core_module_implements_alter(&$implementations, $hook) {
+
+  if ($hook == 'dataset_update' || $hook == 'dataset_insert') {
+
+    // Move ekan_core_dataset_insert() and ekan_core_dataset_insert()to the
+    // end of the list.
+    // \Drupal::moduleHandler()->getImplementations()
+    // iterates through $implementations with a foreach loop which PHP iterates
+    // in the order that the items were added, so to move an item to the end of
+    // the array, we remove it and then add it.
+    $group = $implementations['ekan_core'];
+    unset($implementations['ekan_core']);
+    $implementations['ekan_core'] = $group;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ekan_core_dataset_insert(EntityInterface $entity) {
+  // Create a dataset .json file for Project Open Data Data.
+  /** @var \Drupal\ekan_core\Service\PodDataBuilderInterface $data_builder */
+  $data_builder = \Drupal::service('ekan_core.pod_data_builder');
+  $data_builder->createDatasetJsonFile($entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function ekan_core_dataset_update(EntityInterface $entity) {
+  // Create a dataset .json file for Project Open Data Data.
+  /** @var \Drupal\ekan_core\Service\PodDataBuilderInterface $data_builder */
+  $data_builder = \Drupal::service('ekan_core.pod_data_builder');
+  $data_builder->createDatasetJsonFile($entity);
+}
+
+/**
+ * Implements hook_jsonapi_entity_filter_access().
+ *
+ * Allow json:api filtering on datasets and resources for API data fetches.
+ */
+function ekan_core_jsonapi_entity_filter_access(EntityTypeInterface $entity_type, AccountInterface $account) {
+  switch ($entity_type->id()) {
+    case 'dataset':
+    case 'resource':
+      return ([
+        JSONAPI_FILTER_AMONG_PUBLISHED => AccessResult::allowed(),
+      ]);
+  }
+}

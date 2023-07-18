@@ -1,0 +1,765 @@
+//
+// Styles for Dataset page
+// --------------------------------------------------
+
+.dataset_content {
+  margin: 10px 0;
+  //display: flex;
+
+  .dataset_side_menu {
+    padding-left: 0;
+  }
+
+  .dataset__title {
+    border-bottom: 1px solid #ededed;
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1.1;
+  }
+
+  //side block
+  .pane-block {
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 0px;
+  }
+
+  .dataset__publisher {
+    background-color: transparent;
+    margin: 0;
+    padding: 15px;
+
+    .dataset__license {
+      p {
+        margin: 0;
+      }
+    }
+
+    .publisher__field-image {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      border-radius: 50%;
+      margin: 20px auto;
+    }
+
+    .publisher__label {
+      font-size: 1.2em;
+      margin: 7px 0;
+      font-weight: 400;
+
+    }
+
+    .views-field-field-description {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 7;
+      -webkit-box-orient: vertical;
+    }
+
+    .mt-3 {
+      margin-top: 0 !important;
+    }
+  }
+
+  .dataset_license_side {
+    .dataset__license {
+      background-color: transparent;
+      margin: 0;
+      padding: 15px;
+
+      a {
+        word-break: break-word;
+      }
+    }
+  }
+
+  .dataset_license_side, .dataset_location_side {
+    h2 {
+      border-radius: 5px 5px 0 0;
+      //border: 1px solid;
+      border-bottom: none;
+      font-size: 16px;
+      line-height: 1.3;
+      margin: 0;
+      padding: 7px 10px;
+      font-weight: normal;
+      background-color: $brand-primary;
+      color: white;
+    }
+  }
+
+  .dataset_field_info {
+    tbody {
+      th {
+        width: 21%;
+      }
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  .dataset_harvest {
+    margin-top: 30px;
+
+    .harvest_from {
+      margin: 0;
+      color: grey;
+    }
+
+    .table-striped {
+      margin-top: 0;
+
+      tbody {
+        th {
+          width: 27%;
+        }
+      }
+    }
+
+  }
+
+  .dataset__related-content {
+    .field__label {
+      font-weight: $font-weight-bold;
+      margin-top: 1em;
+      margin-bottom: 0.5em;
+      font-size: 1.5rem;
+    }
+
+    .field__item {
+      border:1px solid $border;
+      padding: 10px 20px;
+    }
+  }
+
+  //tags style
+  .dataset-tags {
+    .views-row {
+      display: inline-block;
+
+      a {
+        display: inline-block;
+        padding:2px 10px 2px;
+        font-size:12px;
+        line-height: 20px;
+        -webkit-border-radius: 0 5px 5px 0;
+        -moz-border-radius: 0 5px 5px 0;
+        border-radius: 0 5px 5px 0;
+        background-color: $shade;
+        margin:3px 5px 3px 20px;
+        position:relative;
+        color:$gray-dark;
+        border:1px solid $border;
+        border-left:0;
+        z-index:2;
+        &:after {
+          content: "";
+          width: 20px;
+          height: 20px;
+          background-color: $shade;
+          transform: rotate(45deg);
+          border-radius: 2px;
+          position: absolute;
+          top: 2px;
+          left: -9px;
+          z-index: -1;
+          border: 1px solid #ddd;
+          border-top: none;
+          border-right: none;
+        }
+        &:before {
+          content:"";
+          width:2px;
+          height:2px;
+          background:$gray-light;
+          position:absolute;
+          top:11px;
+          left:-5px;
+          webkit-border-radius: 0;
+          -moz-border-radius: 0;
+          border-radius: 0;
+        }
+      }
+      a:hover, a:hover:after {
+        background: #fff;
+        color:#000;
+        text-decoration:none;
+      }
+    }
+  }
+
+  .dataset__topic {
+    display: flex;
+
+    .field__item {
+      margin-right: 15px;
+    }
+  }
+
+}
+
+
+.field-name-field-tags .field-item {
+  display:inline-block;
+}
+.field-name-field-tags {
+  label {
+    display: block;
+  }
+  input.form-control {
+    height: auto;
+  }
+  .field-item {
+    a {
+      display: inline-block;
+      padding:2px 10px 2px;
+      font-size:12px;
+      line-height: 20px;
+      @include border-radius(0 5px 5px 0);
+      background-color: $shade;
+      margin:3px 5px 3px 20px;
+      position:relative;
+      color:$gray-dark;
+      border:1px solid $border;
+      border-left:0;
+      z-index:2;
+      &:after {
+        content:"";
+        width: 20px;
+        height: 20px;
+        background-color: $shade;
+        //@include rotate(45deg);
+        @include border-radius(2px);
+        position:absolute;
+        top:2px;
+        left:-9px;
+        z-index:-1;
+        border:1px solid $border;
+        border-top:none;
+        border-right:none;
+      }
+      &:before {
+        content:"";
+        width:2px;
+        height:2px;
+        background:$gray-light;
+        position:absolute;
+        top:11px;
+        left:-5px;
+        @include border-radius(0);
+      }
+    }
+    a:hover,
+    a:hover:after {
+      background: #fff;
+      color:#000;
+      text-decoration:none;
+    }
+  }
+}
+
+.field-name-field-topic {
+  .field-item {
+    margin: 0 1.5em .5em 0;
+    .field-item {
+      margin: 0;
+    }
+  }
+}
+.field-name-field-topic-icon span::before,
+.view-dkan-datasets .field-name-field-topic-icon span::before {
+  font-size: 18px;
+}
+.font_icon_select_options .label {
+  color: #333;
+}
+
+//Data and Resource view block
+.data-and-resource-block {
+  margin-bottom: 1em;
+
+  header {
+    p {
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 2em;
+      margin-bottom: .5em;
+    }
+  }
+
+  .views-field-resource-format {
+    .dataset_ref {
+      display: flex;
+      align-items: center;
+
+      a.link_to_resource {
+        &:hover {
+          text-decoration: unset;
+        }
+      }
+
+      .text-body p:last-child{
+        margin-bottom: 0;
+      }
+
+      @media only screen and (min-width: 992px) {
+        .left-content {
+          width: 100%;
+
+          .text-body {
+            width: 55%;
+          }
+        }
+      }
+
+      @media only screen and (min-width: 1200px) {
+        .text-body {
+          width: 65%;
+        }
+      }
+
+      .dataset_btn {
+        //right: 0;
+        position: absolute;
+
+        .data-link {
+          a {
+            color: white;
+          }
+        }
+
+        .preview_btn {
+          &:before {
+            content: '\f080';
+            font-family: $icon-font;
+            font-style: normal;
+            font-weight: normal;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+
+    span {
+      .tooltiptext {
+        visibility: hidden;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        position: absolute;
+        z-index: 1;
+        opacity: 0.9;
+        width: auto;
+        padding: 0 5px;
+        left: 5px;
+
+        &:before {
+          content: "";
+          position: absolute;
+          border-style: solid;
+          border-width: 12px 0 12px 10px;
+          border-color: transparent black;
+          display: block;
+          width: 0;
+          z-index: 1;
+          right: 34%;
+          top: -14px;
+          transform: rotate(-90deg);
+        }
+      }
+
+      &:hover .tooltiptext {
+        visibility: visible;
+      }
+
+      &:before {
+        font-family: 'dkan-flaticon';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        font-size: 50px;
+      }
+    }
+
+    .format-label[data-format=xls] {
+      &:before {
+        content: "\e6af";
+        color: #2db55d;
+      }
+    }
+
+    .format-label[data-format=zip] {
+      &:before {
+        content: "\e6b3";
+        color: #686868;
+      }
+    }
+
+    .format-label[data-format=tsv] {
+      &:before {
+        content: "\e900";
+        color: #6f5191;
+      }
+    }
+
+    .format-label[data-format=rest], .format-label[data-format=openxml], .format-label[data-format=excel],
+    .format-label[data-format=esri], .format-label[data-format=arcgis] {
+      &:before {
+        content: "\e626";
+        color: olive;
+      }
+    }
+
+    .format-label[data-format=pdf] {
+      &:before {
+        content: "\e67b";
+        color: #e0051e;
+      }
+    }
+
+    .format-label[data-format=kml] {
+      &:before {
+        content: "\e654";
+        color: #3F6EA5;
+      }
+    }
+
+    .format-label[data-format=geojson] {
+      &:before {
+        content: "\e923";
+        color: #ef7100;
+      }
+    }
+
+    .format-label[data-format=csv] {
+      &:before {
+        content: "\e622";
+        color: #dfb100;
+      }
+    }
+
+    .format-label {
+      &:before {
+        content: "\e626";
+        color: olive;
+      }
+    }
+  }
+}
+//Create a dataset
+.dataset-links {
+  list-style: none;
+  color: #aeaeae;
+  counter-reset: stage;
+  padding: 0;
+  overflow: hidden;
+  margin: 0 0 20px;
+
+  li {
+    font-size: 14px;
+    box-sizing: border-box;
+    line-height: 27px;
+    counter-increment: stage;
+    width: 33.33%;
+    float: left;
+    padding: 10px;
+    position: relative;
+    z-index: 0;
+    color: #666;
+    background-color: #ededed;
+
+    &.active {
+      background: none;
+
+      &:before {
+        color: #8cc68a;
+        background: #ffffff;
+      }
+
+      a {
+        background: #8cc68a;
+        color: white;
+      }
+    }
+
+    &.complete {
+      a {
+        background: #C5E2C6;
+        color: #666;
+      }
+
+      &:before {
+        color: #666;
+        background: #eef6ed;
+      }
+
+      &:after {
+        border-color: rgba(197,226,196,0);
+        border-top-color: #c5e2c4;
+        border-bottom-color: #c5e2c4;
+      }
+    }
+
+    &.uncomplete {
+      a {
+        color: #666;
+      }
+    }
+
+    &:before {
+      border-radius: 14px;
+      content: counter(stage);
+      display: inline-block;
+      width: 27px;
+      height: 27px;
+      margin-right: 5px;
+      font-weight: bold;
+      text-align: center;
+      background-color: #d5d5d5;
+      z-index: 1;
+    }
+
+    a {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      padding: 10px 42px;
+      border: none;
+      text-align: left;
+      text-decoration: none;
+      line-height: 27px;
+      z-index: -1;
+    }
+
+    &.first {
+      a {
+        border-radius: 5px 0 0 5px;
+      }
+
+      &:after {
+        content: none;
+      }
+    }
+
+    &:after {
+      left: 0;
+      border: solid rgba(237,237,237,0);
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-top-color: #ededed;
+      border-bottom-color: #ededed;
+      border-width: 29px;
+      top: 50%;
+      margin-top: -29px;
+      margin-left: -30px;
+    }
+
+    &.middle.active, &.last.active {
+      &:after {
+        border-color: rgba(140,198,138,0);
+        border-top-color: #8cc68a;
+        border-bottom-color: #8cc68a;
+      }
+    }
+  }
+}
+
+#dataset-add-dataset-form {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  border-color: #CDCDCD;
+  padding: 15px;
+
+  label {
+    font-weight: bold;
+  }
+
+  .field--name-tags, .field--name-topic {
+    #tags-values, #topic-values {
+      tr {
+        th.field-label {
+
+          h4 {
+            max-width: 100%;
+            margin: 5px 0;
+            font-weight: bold;
+            font-size: 16px;
+          }
+        }
+
+        &:hover {
+          background: none;
+        }
+      }
+
+    }
+  }
+}
+
+#resource-form {
+  .horizontal-tab-button {
+    background: none;
+    border: none;
+
+    .summary {
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    #active-horizontal-tab {
+      background: url('../../../ekan_theme/assets/images/sprite-ckan-icons.png') no-repeat -193px 2px;
+      display: block;
+      text-indent: -9999px;
+      width: 16px;
+      height: 16px;
+      left: 50%;
+      //bottom: -14px;
+      clip: auto;
+    }
+
+    a {
+      &:hover {
+        background-color: #fffece;
+      }
+    }
+  }
+
+  .horizontal-tab-button-0 {
+    .summary {
+      background: url('../../../ekan_theme/assets/images/sprite-ckan-icons.png') no-repeat -144px 0;
+    }
+  }
+
+  .horizontal-tab-button-1, .horizontal-tab-button-2 {
+    .summary {
+      background: url('../../../ekan_theme/assets/images/sprite-ckan-icons.png') no-repeat -160px 0;;
+    }
+  }
+
+  .horizontal-tabs-list {
+    background-color: transparent;
+    border: 0;
+    padding-top: 10px;
+
+    a {
+      font-size: 1.1em;
+      position: relative;
+      padding: 5px 15px 5px 30px;
+    }
+  }
+
+  .horizontal-tabs-panes {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  .selected {
+    a {
+      color: #3B3B3B !important;
+    }
+  }
+
+  label {
+    font-weight: bold;
+  }
+
+  .field--name-dataset-ref {
+    #dataset-ref-values {
+      tr {
+        th.field-label {
+
+          h4 {
+            max-width: 100%;
+            margin: 5px 0;
+            font-weight: bold;
+            font-size: 16px;
+          }
+        }
+
+        &:hover {
+          background: none;
+        }
+      }
+
+    }
+  }
+}
+
+#dataset-additional-info-form {
+  label {
+    font-weight: bold;
+  }
+
+  .field--name-additional-info, .field--name-related-content {
+    #additional-info-values, #related-content-values {
+      tr {
+        th.field-label {
+
+          h4 {
+            max-width: 100%;
+            margin: 5px 0;
+            font-weight: bold;
+            font-size: 16px;
+          }
+        }
+
+        &:hover {
+          background: none;
+        }
+      }
+
+    }
+  }
+}
+
+.views-field-topic-target-id-1 {
+  ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+
+    li {
+      margin-right: 15px;
+    }
+  }
+}
+.fa-download {
+  &:before {
+    font-family: "Font Awesome 5 Free";
+    font-style: normal;
+    font-weight: 600;
+    margin-right: .5em;
+  }
+}
+.fa-bar-chart  {
+  &:before {
+    content: "\f080";
+    font-family: "Font Awesome 5 Free";
+    font-style: normal;
+    font-weight: 600;
+    margin-right: .5em;
+  }
+}

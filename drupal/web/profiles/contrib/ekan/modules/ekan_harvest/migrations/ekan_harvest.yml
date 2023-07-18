@@ -1,0 +1,10 @@
+id: ekan_harvest
+label: Ekan Harvest Migration
+migration_group: ekan_harvest
+deriver: Drupal\ekan_harvest\Plugin\Derivative\EkanHarvestDeriver
+source:
+  plugin: url
+  data_parser_plugin: harvest_source_json
+  data_fetcher_plugin: file
+destination:
+  plugin: entity:dataset

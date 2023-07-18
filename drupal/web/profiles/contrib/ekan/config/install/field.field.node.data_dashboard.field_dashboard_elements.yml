@@ -1,0 +1,35 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_dashboard_elements
+    - node.type.data_dashboard
+    - paragraphs.paragraphs_type.embedded_resource
+    - paragraphs.paragraphs_type.text
+  module:
+    - entity_reference_revisions
+id: node.data_dashboard.field_dashboard_elements
+field_name: field_dashboard_elements
+entity_type: node
+bundle: data_dashboard
+label: 'Dashboard Elements'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      embedded_resource: embedded_resource
+      text: text
+    target_bundles_drag_drop:
+      embedded_resource:
+        enabled: true
+        weight: 3
+      text:
+        enabled: true
+        weight: 4
+field_type: entity_reference_revisions

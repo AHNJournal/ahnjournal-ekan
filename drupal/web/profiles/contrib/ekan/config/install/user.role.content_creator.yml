@@ -1,0 +1,76 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.data_dashboard
+    - node.type.data_story
+    - node.type.page
+    - taxonomy.vocabulary.format
+    - taxonomy.vocabulary.tags
+    - taxonomy.vocabulary.topics
+  module:
+    - ekan_core
+    - group
+    - node
+    - path
+    - system
+    - taxonomy
+    - toolbar
+id: content_creator
+label: 'Content Creator'
+weight: -7
+is_admin: null
+permissions:
+  - 'access content overview'
+  - 'access group overview'
+  - 'access taxonomy overview'
+  - 'access toolbar'
+  - 'administer dataset entities'
+  - 'administer menu'
+  - 'administer nodes'
+  - 'administer resource entities'
+  - 'create data_dashboard content'
+  - 'create data_story content'
+  - 'create dataset'
+  - 'create group group'
+  - 'create page content'
+  - 'create publisher content'
+  - 'create resource'
+  - 'create terms in format'
+  - 'create terms in tags'
+  - 'create terms in topics'
+  - 'create url aliases'
+  - 'delete any data_dashboard content'
+  - 'delete any data_story content'
+  - 'delete any dataset'
+  - 'delete any page content'
+  - 'delete any publisher content'
+  - 'delete any resource'
+  - 'delete own data_dashboard content'
+  - 'delete own data_story content'
+  - 'delete own dataset'
+  - 'delete own page content'
+  - 'delete own publisher content'
+  - 'delete own resource'
+  - 'delete terms in format'
+  - 'delete terms in tags'
+  - 'delete terms in topics'
+  - 'edit any data_dashboard content'
+  - 'edit any data_story content'
+  - 'edit any page content'
+  - 'edit any publisher content'
+  - 'edit own data_dashboard content'
+  - 'edit own data_story content'
+  - 'edit own page content'
+  - 'edit own publisher content'
+  - 'edit terms in format'
+  - 'edit terms in tags'
+  - 'edit terms in topics'
+  - 'update any dataset'
+  - 'update any resource'
+  - 'update own dataset'
+  - 'update own resource'
+  - 'view own unpublished content'
+  - 'view own unpublished dataset'
+  - 'view own unpublished resource'
+  - 'view the administration theme'

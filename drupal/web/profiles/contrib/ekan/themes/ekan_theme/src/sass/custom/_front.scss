@@ -1,0 +1,83 @@
+
+.front-page {
+
+  .home-page {
+    display: flex;
+
+    .banner {
+      .front-image {
+        width: 450px;
+        margin: auto;
+        display: block;
+      }
+
+      .inside {
+        padding: 15% 30px;
+        text-align: center;
+
+        h2 {
+          padding-bottom: 10px;
+        }
+      }
+
+      .about-btn {
+        margin: 1em 0;
+        color: $btn-primary-color;
+        background-color: $brand-primary;
+        border-color: $brand-primary;
+      }
+
+      h2, p {
+        color: white;
+      }
+    }
+  }
+
+  .welcome-banner {
+    background-color: #005e9a;
+    padding-top: 3rem;
+  }
+
+  .pt-5 {
+    //padding-top: 0 !important;
+
+    .block--ekan-theme-page-title {
+      border: none;
+    }
+  }
+
+  .block--views-block--ekan-featured-topics-block-1 {
+    .views-view-grid {
+      .views-field-name {
+        .topics-icon {
+          display: grid;
+          text-align: center;
+
+          span {
+            font-size: 100px;
+          }
+
+          .topic_name {
+            display: block;
+            margin: 5px 0;
+            text-align: center;
+            width: 100%;
+
+            a {
+              &:hover {
+                text-decoration: none;
+              }
+            }
+          }
+        }
+
+        a.link_to_search {
+          &:hover {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}
+

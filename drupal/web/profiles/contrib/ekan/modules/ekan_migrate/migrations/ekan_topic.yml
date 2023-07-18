@@ -1,0 +1,39 @@
+id: ekan_topic
+label: Topic
+migration_group: ekan
+source:
+  plugin: d7_taxonomy_term
+  bundle: dkan_topics
+  constants:
+    default_text_format: 'full_html'
+process:
+  name: name
+  description/value: description
+  description/format: constants/default_text_format
+  parent:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: parent
+    -
+      plugin: migration_lookup
+      migration: ekan_topic
+  field_icon_char_code:
+    plugin: callback
+    callable: _ekan_migrate_process_icon_code
+    source: field_topic_icon
+  field_image/target_id:
+    plugin: migration_lookup
+    migration: ekan_file
+    source: field_image/0/fid
+  field_image/title: field_image/0/title
+  field_image/alt: field_image/0/alt
+
+destination:
+  plugin: entity:taxonomy_term
+  default_bundle: topics
+  validate: true
+
+migration_dependencies:
+  required:
+    - ekan_file

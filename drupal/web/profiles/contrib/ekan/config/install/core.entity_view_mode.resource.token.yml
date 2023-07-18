@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_core
+id: resource.token
+label: Token
+targetEntityType: resource
+cache: true

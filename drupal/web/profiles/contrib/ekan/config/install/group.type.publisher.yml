@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies: {  }
+id: publisher
+label: Publisher
+description: ''
+new_revision: true
+creator_membership: false
+creator_wizard: false
+creator_roles: {  }

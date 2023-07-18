@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.data_dashboard
+id: node.data_dashboard
+target_entity_type_id: node
+target_bundle: data_dashboard
+default_langcode: site_default
+language_alterable: false

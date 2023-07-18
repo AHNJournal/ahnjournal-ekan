@@ -1,0 +1,11 @@
+ekan_core.add_dataset:
+  route_name: ekan_core.dataset.step1
+  title: 'Add Dataset'
+  appears_on:
+    - view.datasets.page_1
+ekan_core.add_resource:
+  route_name: entity.resource.add
+  title: 'Add Resource'
+  appears_on:
+    - view.resources.page_1
+

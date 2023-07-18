@@ -1,0 +1,180 @@
+id: pod_data_v11_json
+label: Project Open Data v1.1 JSON Datasets
+migration_group: ekan_harvest
+source:
+  track_changes: true
+#  plugin: url
+#  urls: {}
+  data_fetcher_plugin: file
+  data_parser_plugin: harvest_source_json
+  item_selector: /dataset
+  fields:
+    -
+      name: accessLevel
+      selector: accessLevel
+    -
+      name: rights
+      selector: rights
+    -
+      name: accrualPeriodicity
+      selector: accrualPeriodicity
+    -
+      name: contactPoint_fn
+      selector: contactPoint/fn
+    -
+      name: contactPoint_hasEmail
+      selector: contactPoint/hasEmail
+    -
+      name: describedBy
+      selector: describedBy
+    -
+      name: describedByType
+      selector: describedByType
+    -
+      name: identifier
+      selector: identifier
+    -
+      name: title
+      selector: title
+    -
+      name: description
+      selector: description
+    -
+      name: keywords
+      selector: keyword
+    -
+      name: issued
+      selector: issued
+    -
+      name: modified
+      selector: modified
+    -
+      name: theme
+      selector: theme
+    -
+      name: license
+      selector: license
+    -
+      name: spatial
+      selector: spatial
+    -
+      name: isPartOf
+      selector: isPartOf
+    -
+      name: publisher
+      selector: publisher/name
+    -
+      name: references
+      selector: references
+    -
+      name: temporal
+      selector: temporal
+    -
+      name: spatial
+      selector: spatial
+    -
+      name: landingPage
+      selector: landingPage
+  ids:
+    identifier:
+      type: string
+process:
+  public_access_level:
+    -
+      plugin: str_replace
+      source: accessLevel
+      search: "non-public"
+      replace: "private"
+    -
+      plugin: str_replace
+      search: "restricted public"
+      replace: "public"
+  rights/value: rights
+  rights/format:
+    plugin: default_value
+    default_value: 'full_html'
+  frequency: accrualPeriodicity
+  contact_name: contactPoint_fn
+  contact_email:
+    plugin: str_replace
+    source: contactPoint_hasEmail
+    search: "mailto:"
+    replace: ""
+  data_dictionary_type: describedByType
+  data_dictionary: describedBy
+  conforms_to: conformsTo
+  body/value: description
+  body/format:
+    plugin: default_value
+    default_value: 'full_html'
+  uuid: identifier
+  tags:
+    source: keywords
+    plugin: entity_generate
+    value_key: name
+    bundle_key: vid
+    bundle: tags
+    entity_type: taxonomy_term
+    ignore_case: true
+  language: language
+  license:
+    source: license
+    plugin: license_lookup
+  publisher:
+    -
+      plugin: explode
+      source: publisher
+      delimiter: ','
+    -
+      plugin: callback
+      callable: trim
+    -
+      plugin: entity_generate
+      entity_type: group
+      bundle_key: type
+      bundle: publisher
+      ignore_case: true
+      value_key: label
+
+  related_content: references
+
+  temporal: temporal
+  spatial: spatial
+  is_part_of: isPartOf
+
+  created:
+    plugin: callback
+    callable: strtotime
+    source: issued
+  harvest_source_issue:
+    plugin: callback
+    callable: strtotime
+    source: issued
+  modified:
+    plugin: callback
+    callable: strtotime
+    source: modified
+  harvest_source_modified:
+    plugin: callback
+    callable: strtotime
+    source: modified
+  landing_page/uri: landingPage
+  topic:
+    source: theme
+    plugin: entity_generate
+    entity_type: taxonomy_term
+    bundle_key: vid
+    bundle: topics
+    ignore_case: true
+    value_key: name
+
+  title: title
+
+  pod_theme: theme
+#  debug:
+#    plugin: callback
+#    callable: var_dump
+#    source: accessLevel
+destination:
+  plugin: entity:dataset
+  validate: true

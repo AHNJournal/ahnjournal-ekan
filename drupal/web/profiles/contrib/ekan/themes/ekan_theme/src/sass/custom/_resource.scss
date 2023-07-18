@@ -1,0 +1,201 @@
+
+//resources page
+.resource_content {
+  margin: 10px 0;
+
+  .file--mime-application-pdf:before {
+    content: '\f1c1'; /* You should use \ and not /*/
+    font-family: $icon-font; /* This is the correct font-family*/
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    margin-right: 10px;
+  }
+
+  .file--mime-image-jpeg:before, .file--mime-image-png:before, .file--mime-image-jpeg:before {
+    content: '\f1c5'; /* You should use \ and not /*/
+    font-family: $icon-font; /* This is the correct font-family*/
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    margin-right: 10px;
+  }
+
+  .file--mime-text-plain:before, .file--mime-application-msword:before, .file--x-office-document:before {
+    content: '\f15c'; /* You should use \ and not /*/
+    font-family: $icon-font; /* This is the correct font-family*/
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    margin-right: 10px;
+  }
+
+}
+
+.related-resource {
+
+  h2 {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+
+  a {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    color: black;
+    margin-bottom: 10px;
+
+    &:last-child {
+      border-radius: 4px;
+    }
+  }
+
+  a.active {
+    background-color: $brand-primary;
+    color: white;
+  }
+
+  .views-field-dataset-ref-target-id {
+    ol {
+      list-style: none;
+      padding: 0;
+    }
+  }
+}
+
+#resource-add-form {
+  .horizontal-tab-button {
+    background: none;
+    border: none;
+
+    .summary {
+      width: 16px;
+      height: 16px;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+
+    #active-horizontal-tab {
+      background: url('../../../ekan_theme/assets/images/sprite-ckan-icons.png') no-repeat -193px 2px;
+      display: block;
+      text-indent: -9999px;
+      width: 16px;
+      height: 16px;
+      left: 50%;
+      //bottom: -14px;
+      clip: auto;
+    }
+
+    a {
+      &:hover {
+        background-color: #fffece;
+      }
+    }
+  }
+
+  .horizontal-tab-button-0 {
+    .summary {
+      background: url('../../../ekan_theme/assets/images/sprite-ckan-icons.png') no-repeat -144px 0;
+    }
+  }
+
+  .horizontal-tab-button-1, .horizontal-tab-button-2 {
+    .summary {
+      background: url('../../../ekan_theme/assets/images/sprite-ckan-icons.png') no-repeat -160px 0;;
+    }
+  }
+
+  .horizontal-tabs-list {
+    background-color: transparent;
+    border: 0;
+    padding-top: 10px;
+
+    a {
+      font-size: 1.1em;
+      position: relative;
+      padding: 5px 15px 5px 30px;
+    }
+  }
+
+  .horizontal-tabs-panes {
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+
+  .selected {
+    a {
+      color: #3B3B3B !important;
+    }
+  }
+
+  label {
+    font-weight: bold;
+  }
+
+  .field--name-dataset-ref {
+    #dataset-ref-values {
+      tr {
+        th.field-label {
+
+          h4 {
+            max-width: 100%;
+            margin: 5px 0;
+            font-weight: bold;
+            font-size: 16px;
+          }
+        }
+
+        &:hover {
+          background: none;
+        }
+      }
+
+    }
+  }
+}
+
+.resource-additional-info {
+  h2 {
+    font-weight: 300;
+    margin-bottom: .5em;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    font-size: 2rem;
+    line-height: 1.1;
+  }
+
+  table {
+    margin-top: -5px;
+    tbody {
+      tr:nth-child(even) {
+        background-color: #eee;
+        border-bottom: 1px solid #ccc;
+        padding: 0.1em 0.6em;
+      }
+    }
+  }
+}
+
+.resource-blocks {
+  display: flex;
+
+  .left-block {
+    padding-left: 0;
+  }
+
+  .right-block {
+    padding-right: 0;
+  }
+}
+
+@media #{$mobile} {
+  .resource-blocks {
+    display: block;
+  }
+}

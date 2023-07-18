@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ekan_theme
+id: pagetitle
+theme: ekan_theme
+region: header
+weight: -7
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Page title dataset'
+  label_display: '0'
+  provider: core
+visibility:
+  request_path:
+    id: request_path
+    pages: "/dataset/add\r\n/dataset/*/resource/add\r\n/dataset/*/additional"
+    negate: false
+    context_mapping: {  }

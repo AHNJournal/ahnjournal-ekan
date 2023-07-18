@@ -1,0 +1,31 @@
+id: ekan_page
+label: Page
+migration_group: ekan
+source:
+  plugin: d7_node
+  node_type: page
+  constants:
+    default_text_format: 'full_html'
+process:
+  uid:
+    -
+      plugin: migration_lookup
+      migration: ekan_user
+      source: node_uid
+    -
+      plugin: default_value
+      default_value: 1
+  title: title
+  created: created
+  changed: changed
+  body/value: body/0/value
+  body/format: constants/default_text_format
+
+destination:
+  plugin: entity:node
+  default_bundle: page
+  validate: true
+
+migration_dependencies:
+  required:
+    - ekan_user

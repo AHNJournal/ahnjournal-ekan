@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - facets.facet.publisher
+  module:
+    - facets
+    - system
+  theme:
+    - ekan_theme
+id: publisher
+theme: ekan_theme
+region: content_left
+weight: -4
+provider: null
+plugin: 'facet_block:publisher'
+settings:
+  id: 'facet_block:publisher'
+  label: Publisher
+  label_display: '0'
+  provider: facets
+  block_id: publisher
+visibility:
+  request_path:
+    id: request_path
+    pages: /search
+    negate: false
+    context_mapping: {  }

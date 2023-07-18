@@ -1,0 +1,6 @@
+services:
+  ekan_core.core_commands:
+    class: \Drupal\ekan_core\Commands\EkanCoreCommands
+    arguments: []
+    tags:
+      - { name: drush.command }

@@ -1,0 +1,4 @@
+ekan_harvest.ekan_harvester_type:
+  label: 'Ekan Harvester Type'
+  plugin_manager_service_id: plugin.manager.ekan_harvester_type
+  plugin_definition_decorator_class: Drupal\plugin\PluginDefinition\ArrayPluginDefinitionDecorator

@@ -1,0 +1,59 @@
+show-visualisation-options:
+  js:
+    js/show-visualisation-options.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+echarts:
+  js:
+    https://cdn.jsdelivr.net/npm/echarts@4/dist/echarts.min.js: { type: external, minified: true, preprocess: false}
+
+basic-bar-chart:
+  js:
+    js/basic-bar-chart.js: {}
+  dependencies:
+    - ekan_visuals/echarts
+
+basic-pie-chart:
+  js:
+    js/basic-pie-chart.js: {}
+  dependencies:
+    - ekan_visuals/echarts
+
+geojson_visualisation:
+  version: VERSION
+  js:
+    js/geojson.visualisation.js: {}
+  dependencies:
+    - leaflet/leaflet
+    - core/jquery
+    - core/drupal
+
+leaflet.ajax:
+  version: 1.x
+  js:
+    js/leaflet_ajax/leaflet.ajax.js: {}
+  dependencies:
+    - leaflet/leaflet
+
+resource-preview-toggle:
+  js:
+    js/resource-preview-toggle.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+detect_pdf:
+  js:
+    js/detect_pdf.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+
+detect_geojson:
+  js:
+    js/detect_geojson.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

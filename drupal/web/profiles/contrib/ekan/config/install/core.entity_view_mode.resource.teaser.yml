@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_core
+id: resource.teaser
+label: Teaser
+targetEntityType: resource
+cache: true

@@ -1,0 +1,7 @@
+services:
+  plugin.manager.ekan_harvester_type:
+    class: Drupal\ekan_harvest\EkanHarvesterTypeManager
+    parent: default_plugin_manager
+  Drupal\ekan_harvest\EventSubscriber\MigrateEventSubscriber:
+    tags:
+      - { name: 'event_subscriber' }

@@ -1,0 +1,34 @@
+two_column_dataset:
+  label: 'Two column dataset'
+  category: 'EKAN dataset Layouts'
+  template: templates/two-column-dataset
+  default_region: main
+  regions:
+    publisher_info:
+      label: Publisher info
+    license:
+      label: License
+    location:
+      label: Location map
+    main:
+      label: Main content
+  icon_map:
+    - [publisher_info, main]
+    - [license, main]
+    - [location, main]
+
+two_column_resource:
+  label: 'Two column resource'
+  category: 'EKAN resource Layouts'
+  template: templates/two-column-resource
+  default_region: main
+  regions:
+    main:
+      label: Main content
+    resources_info:
+      label: Resources info
+    additional_info:
+      label: Additional info
+  icon_map:
+    - [main]
+    - [resources_info, additional_info]

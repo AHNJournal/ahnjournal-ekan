@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_core
+  theme:
+    - ekan_theme
+id: ekancontextualhelp
+theme: ekan_theme
+region: content_left
+weight: -8
+provider: null
+plugin: ekan_contextual_help
+settings:
+  id: ekan_contextual_help
+  label: 'Ekan Contextual Help'
+  label_display: visible
+  provider: ekan_core
+visibility: {  }

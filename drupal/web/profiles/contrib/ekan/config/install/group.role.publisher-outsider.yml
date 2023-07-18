@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.publisher
+id: publisher-outsider
+label: Outsider
+weight: -101
+internal: true
+audience: outsider
+group_type: publisher
+permissions_ui: true
+permissions:
+  - 'view dataset entity'
+  - 'view group'
+  - 'view resource entity'

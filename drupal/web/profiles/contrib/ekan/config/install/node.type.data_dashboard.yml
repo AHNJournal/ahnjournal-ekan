@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Data Dashboard'
+type: data_dashboard
+description: ''
+help: "A dashboard can be used to group many resources, with their visualisations onto a single landing page.\r\n\r\nText can added between resources with further explanations for end users."
+new_revision: true
+preview_mode: 0
+display_submitted: false

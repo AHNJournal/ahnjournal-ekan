@@ -1,0 +1,92 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.dataset.teaser
+  module:
+    - ekan_core
+    - layout_builder
+third_party_settings:
+  layout_builder:
+    allow_custom: false
+    enabled: false
+id: dataset.dataset.teaser
+targetEntityType: dataset
+bundle: dataset
+mode: teaser
+content:
+  Spatial:
+    type: geofield_latlon
+    weight: 9
+    region: content
+    label: above
+    settings:
+      output_format: decimal
+    third_party_settings: {  }
+  publisher:
+    label: hidden
+    type: entity_reference_icon_label
+    region: content
+    weight: 1
+    settings:
+      link: 0
+    third_party_settings: {  }
+  search_api_excerpt:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  tags:
+    label: hidden
+    type: entity_reference_label
+    region: content
+    weight: 3
+    settings:
+      link: true
+    third_party_settings: {  }
+  topic:
+    label: hidden
+    type: entity_reference_icon_label
+    region: content
+    weight: 2
+    settings:
+      link: true
+    third_party_settings: {  }
+  user_id:
+    label: hidden
+    type: author
+    weight: 19
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  additional_info: true
+  author: true
+  body: true
+  conforms_to: true
+  contact_email: true
+  contact_name: true
+  data_dictionary: true
+  data_dictionary_type: true
+  frequency: true
+  granularity: true
+  harvest_source_issue: true
+  harvest_source_modified: true
+  harvest_source_ref: true
+  is_part_of: true
+  landing_page: true
+  langcode: true
+  language: true
+  layout_builder__layout: true
+  license: true
+  modified_date: true
+  orphan: true
+  pod_theme: true
+  public_access_level: true
+  related_content: true
+  release_date: true
+  rights: true
+  spatial: true
+  spatial_geographical_cover: true
+  temporal_coverage: true
+  uid: true

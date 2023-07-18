@@ -1,0 +1,32 @@
+echarts:
+  js:
+    assets/js/echarts.min.js: { minified: true }
+
+dashboard_resource_pie_chart:
+  js:
+    assets/js/dashboard_resource_pie_chart.js: {}
+  dependencies:
+    - core/jquery
+    - core/once
+    - ekan_statistics/echarts
+
+dashboard_license_pie_chart:
+  js:
+    assets/js/dashboard_license_pie_chart.js: {}
+  dependencies:
+    - core/jquery
+    - core/once
+    - ekan_statistics/echarts
+
+dashboard_topics_bar_chart:
+  js:
+    assets/js/dashboard_topics_bar_chart.js: {}
+  dependencies:
+    - core/jquery
+    - core/once
+    - ekan_statistics/echarts
+
+tag_cloud:
+  css:
+    theme:
+      assets/css/tag_cloud.css: {}

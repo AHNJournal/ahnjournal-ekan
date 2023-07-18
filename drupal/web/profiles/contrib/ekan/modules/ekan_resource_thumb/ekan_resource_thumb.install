@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for the EKAN resource thumb module.
+ */
+
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Implements hook_install().
+ */
+function ekan_resource_thumb_install() {
+  // Add thumbnail field on module install.
+  $storage_definition = BaseFieldDefinition::create('image')
+    ->setLabel(t('Thumbnail image'))
+    ->setSetting('file_extensions', 'jpg jpeg png')
+    ->setSetting('alt_field', FALSE)
+    ->setDescription(t('A thumbnail representing the resource. Auto-generated for PDF resources if left empty.'))
+    ->setDisplayOptions('form', [
+      'type' => 'image',
+      'weight' => 3,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('thumbnail', 'resource', 'resource', $storage_definition);
+
+  // Add existing resources to the queue.
+  ekan_resource_thumb_update_8001();
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Add all the resource entities to thumbnail queue.
+ */
+function ekan_resource_thumb_update_8001() {
+  $nids = \Drupal::entityQuery('resource')
+    ->execute();
+  $queue = \Drupal::queue('ekan_resource_thumb_queue');
+  $count = 0;
+  foreach ($nids as $nid) {
+    $data['entity_id'] = $nid;
+    $queue->createQueue();
+    $queue->createItem($data);
+    $count++;
+  }
+  Drupal::messenger()->addMessage('Total nodes added to ekan_resource_thumb_queue : ' . $count);
+}

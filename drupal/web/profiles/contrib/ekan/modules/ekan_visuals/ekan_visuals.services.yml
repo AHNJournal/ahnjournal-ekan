@@ -1,0 +1,4 @@
+services:
+  plugin.manager.ekan_visualisation:
+    class: Drupal\ekan_visuals\EkanVisualisationManager
+    parent: default_plugin_manager

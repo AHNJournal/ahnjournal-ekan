@@ -1,0 +1,40 @@
+id: ekan_user_membership
+label: User Membership
+migration_group: ekan
+source:
+  plugin: d7kan_user_membership
+  constants:
+    group_content_type: 'publisher-group_membership'
+process:
+  gid:
+    plugin: migration_lookup
+    migration: ekan_publisher
+    source: group_id
+  entity_id:
+    -
+      plugin: migration_lookup
+      migration: ekan_user
+      source: uid
+    -
+      plugin: skip_on_empty
+      method: row
+
+  type: constants/group_content_type
+  group_roles:
+    -
+      plugin: str_replace
+      source: role_names
+      case_insensitive: TRUE
+      search: ['administrator member']
+      replace: ['publisher-group_admin']
+    -
+      plugin: default_value
+      default_value: NULL
+destination:
+  plugin: entity:group_content
+  validate: true
+
+migration_dependencies:
+  required:
+    - ekan_user
+    - ekan_publisher

@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.embedded_resource.field_resource
+    - paragraphs.paragraphs_type.embedded_resource
+id: paragraph.embedded_resource.default
+targetEntityType: paragraph
+bundle: embedded_resource
+mode: default
+content:
+  field_resource:
+    weight: 0
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+hidden:
+  created: true
+  status: true

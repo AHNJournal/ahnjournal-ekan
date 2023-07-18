@@ -1,0 +1,60 @@
+name: Ekan
+type: profile
+core_version_requirement: ^9.0
+description: 'EKAN Profile'
+distribution:
+  name: 'Drupal'
+dependencies:
+  # Core
+  - node
+  - block
+  - breakpoint
+  - ckeditor5
+  - contextual
+  - menu_link_content
+  - datetime
+  - datetime_range
+  - editor
+  - image
+  - menu_ui
+  - options
+  - path
+  - page_cache
+  - dynamic_page_cache
+  - taxonomy
+  - dblog
+  - toolbar
+  - field_ui
+  - file
+  - views
+  - views_ui
+  - language
+  - layout_discovery
+  - layout_builder
+
+  # EKAN
+  - ekan_core
+  - ekan_harvest
+  - ekan_visuals
+
+  # Contrib
+  - group
+  - components
+  - facets
+  - field_group
+  - leaflet
+  - migrate_tools
+  - role_delegation
+  - search_api
+  - search_api_db
+  - twig_tweak
+  - views_flipped_table
+  - update_helper
+  - autocomplete_deluxe
+  - pathauto
+  - allowed_formats
+  - paragraphs
+
+themes:
+  - ekan_theme
+  - claro

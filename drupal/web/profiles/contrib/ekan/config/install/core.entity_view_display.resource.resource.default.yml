@@ -1,0 +1,256 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_core
+    - ekan_visuals
+    - file
+    - layout_builder
+    - link
+    - text
+    - user
+  theme:
+    - ekan_theme
+third_party_settings:
+  layout_builder:
+    enabled: true
+    allow_custom: false
+    sections:
+      -
+        layout_id: two_column_resource
+        layout_settings:
+          label: dataset_section
+        components:
+          967b4818-f85b-43d2-b12c-98c02a9ab43d:
+            uuid: 967b4818-f85b-43d2-b12c-98c02a9ab43d
+            region: main
+            configuration:
+              id: 'field_block:resource:resource:body'
+              label: Description
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: text_default
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 0
+            additional: {  }
+          a1815f34-ae15-414c-b57b-4fe9749a875b:
+            uuid: a1815f34-ae15-414c-b57b-4fe9749a875b
+            region: main
+            configuration:
+              id: 'field_block:resource:resource:upload'
+              label: 'Upload File'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: file_metadata
+                label: hidden
+                settings: {  }
+                third_party_settings: {  }
+            weight: 2
+            additional: {  }
+          d46e0126-3617-4704-8af4-3b784b3bff6c:
+            uuid: d46e0126-3617-4704-8af4-3b784b3bff6c
+            region: resources_info
+            configuration:
+              id: resources_with_same_dataset
+              label: 'Related Resources'
+              label_display: visible
+              provider: ekan_core
+              context_mapping: {  }
+            weight: 0
+            additional: {  }
+          f1ea6243-a5c9-4fda-b6f8-761f1565b08b:
+            uuid: f1ea6243-a5c9-4fda-b6f8-761f1565b08b
+            region: main
+            configuration:
+              id: 'field_block:resource:resource:visualisation'
+              label: Visualisation
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: visualisation_formatter
+                label: hidden
+                settings:
+                  width: ''
+                  height: ''
+                third_party_settings: {  }
+            weight: 1
+            additional: {  }
+          3ce9a7ac-9eb9-4f0d-ba0f-76797c38655f:
+            uuid: 3ce9a7ac-9eb9-4f0d-ba0f-76797c38655f
+            region: main
+            configuration:
+              id: 'field_block:resource:resource:title'
+              label_display: '0'
+              context_mapping:
+                entity: layout_builder.entity
+              formatter:
+                type: string
+                label: hidden
+                settings:
+                  link_to_entity: false
+                third_party_settings: {  }
+            weight: -3
+            additional: {  }
+          77ea0950-680e-455a-96db-ea424b69b449:
+            uuid: 77ea0950-680e-455a-96db-ea424b69b449
+            region: main
+            configuration:
+              id: 'field_block:resource:resource:link_api'
+              label: 'API Link'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: link_iframed
+                label: hidden
+                settings:
+                  trim_length: '120'
+                  url_only: ''
+                  url_plain: ''
+                  rel: 0
+                  target: _blank
+                  iframe_width: 100%
+                  iframe_height: '600'
+                  hide_link: 0
+                third_party_settings: {  }
+            weight: 3
+            additional: {  }
+          f4a979b3-0f2d-4aa0-847b-881939b3adcb:
+            uuid: f4a979b3-0f2d-4aa0-847b-881939b3adcb
+            region: main
+            configuration:
+              id: 'field_block:resource:resource:resource_type'
+              label: 'Resource Type'
+              label_display: '0'
+              provider: layout_builder
+              context_mapping:
+                entity: layout_builder.entity
+                view_mode: view_mode
+              formatter:
+                type: entity_reference_label
+                label: visually_hidden
+                settings:
+                  link: false
+                third_party_settings: {  }
+            weight: -2
+            additional: {  }
+        third_party_settings: {  }
+id: resource.resource.default
+targetEntityType: resource
+bundle: resource
+mode: default
+content:
+  body:
+    type: text_default
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: content
+  dataset_ref:
+    type: entity_reference_entity_id
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 6
+    region: content
+  datastore_status:
+    type: number_integer
+    label: inline
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    weight: 8
+    region: content
+  link_api:
+    type: link_separate
+    label: inline
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    weight: 2
+    region: content
+  link_remote_file:
+    type: string
+    label: inline
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: 3
+    region: content
+  resource_format:
+    type: entity_reference_entity_id
+    label: inline
+    settings: {  }
+    third_party_settings: {  }
+    weight: 5
+    region: content
+  resource_type:
+    type: entity_reference_label
+    label: inline
+    settings:
+      link: true
+    third_party_settings: {  }
+    weight: 10
+    region: main
+  title:
+    type: string
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    weight: -5
+    region: main
+  uid:
+    type: author
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  upload:
+    type: file_default
+    label: hidden
+    settings:
+      use_description_as_link_text: true
+    third_party_settings: {  }
+    weight: 1
+    region: content
+  user_id:
+    type: author
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 9
+    region: content
+  visualisation:
+    type: visualisation_formatter
+    label: hidden
+    settings: {  }
+    third_party_settings: {  }
+    weight: 4
+    region: main
+hidden:
+  langcode: true
+  orphan: true
+  search_api_excerpt: true

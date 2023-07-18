@@ -1,0 +1,5 @@
+ekan_statistics.overview:
+  title: 'Statistics'
+  route_name: ekan_statistics.dashboard
+  parent: system.admin
+  weight: 100

@@ -1,0 +1,62 @@
+<?php
+
+/**
+ * @file
+ * Hooks for ekan_harvest.
+ */
+
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function ekan_harvest_entity_base_field_info(EntityTypeInterface $entity_type) {
+  // Add Harvest fields to dataset.
+  if ($entity_type
+    ->id() == 'dataset') {
+    // Harvest_source_issue  date field.
+    $fields['harvest_source_issue'] = BaseFieldDefinition::create('timestamp')
+      ->setName('harvest_source_issue')
+      ->setLabel(t('Harvest Source Issue'))
+      ->setDescription(t('Harvest source issued date.'))
+      ->setRevisionable(TRUE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    // Harvest Source Modified.
+    $fields['harvest_source_modified'] = BaseFieldDefinition::create('timestamp')
+      ->setName('harvest_source_modified')
+      ->setLabel(t('Harvest Source Modified'))
+      ->setRevisionable(TRUE)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    // Harvest Source Reference.
+    $fields['harvest_source_ref'] = BaseFieldDefinition::create('entity_reference')
+      ->setName('harvest_source_ref')
+      ->setRevisionable(FALSE)
+      ->setTranslatable(FALSE)
+      ->setLabel(t('Harvest Source Reference'))
+      ->setSetting('target_type', 'harvest_source')
+      ->setSetting('handler', 'default')
+      ->setDisplayOptions('view', [
+        'label' => 'inline',
+        'type' => 'default_formatter',
+      ])
+      ->setDisplayOptions('form', [
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 5,
+        'settings' => [
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ],
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    return $fields;
+  }
+}

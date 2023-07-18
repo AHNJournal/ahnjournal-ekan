@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * EKAN migrate callbacks and hooks.
+ */
+
+/**
+ * Callback to change the format of icon codes.
+ */
+function _ekan_migrate_process_icon_code($code) {
+  return ltrim($code['value'], 'x');
+}

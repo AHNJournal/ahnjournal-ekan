@@ -1,0 +1,16 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - group.type.publisher
+  enforced:
+    config:
+      - user.role.administrator
+id: publisher-a416e6833
+label: Administrator
+weight: -5
+internal: true
+audience: outsider
+group_type: publisher
+permissions_ui: false
+permissions: {  }

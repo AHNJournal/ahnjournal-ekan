@@ -1,0 +1,21 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - filter.format.full_html
+  module:
+    - ekan_core
+    - filter
+    - system
+    - toolbar
+id: authenticated
+label: 'Authenticated user'
+weight: -9
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access dataset content overview'
+  - 'access toolbar'
+  - 'use text format full_html'
+  - 'view dataset'
+  - 'view resource'

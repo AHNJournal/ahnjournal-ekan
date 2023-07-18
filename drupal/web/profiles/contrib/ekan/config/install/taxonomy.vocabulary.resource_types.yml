@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+name: 'Resource Types'
+vid: resource_types
+description: 'Categorisation of resources'
+weight: 0

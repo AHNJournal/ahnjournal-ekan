@@ -1,0 +1,87 @@
+// Page: Header
+// -----------------------------------------------------------------------------
+.page__header {
+
+}
+
+.block--ekan-theme-page-title {
+  border-bottom: 1px solid #ededed;
+}
+
+.block--breadcrumbs {
+  a {
+    color: $brand-primary;
+  }
+
+  .breadcrumb-item.active {
+    color: $brand-secondary;
+  }
+
+  .breadcrumb > li + li::before {
+    content: "/ ";
+    color: rgb(204, 204, 204);
+    padding: 0 5px;
+  }
+
+  .home-link {
+    bottom: -4px;
+    position: relative;
+  }
+}
+
+.navbar {
+  background-color: $brand-primary !important;
+  padding: 0;
+
+  .navbar-nav {
+    .nav-item {
+      margin-right: 10px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+      .nav-link {
+        color: white;
+
+        &:hover {
+          background-color: $brand-secondary;
+        }
+      }
+    }
+  }
+}
+
+.navbar_branding {
+  .container {
+    display: flex;
+
+    .block--exposedformsearch-boxpage-1 {
+      width: 20%;
+      position: absolute;
+      right: 7rem;
+      margin: 8px 0;
+
+      #views-exposed-form-search-box-page-1 {
+        display: flex;
+
+        .js-form-type-textfield {
+          #edit-s {
+            width: 170px;
+            height: 36px;
+            margin: 0;
+          }
+        }
+
+        #edit-submit-search-box {
+          font-family: 'Font Awesome\ 5 Free';
+          font-weight: 900;
+          background: none;
+          color: black;
+          border: none;
+        }
+      }
+    }
+  }
+}
+

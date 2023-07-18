@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for the EKAN visuals module.
+ */
+
+use Drupal\Core\Field\BaseFieldDefinition;
+
+/**
+ * Implements hook_install().
+ */
+function ekan_visuals_install() {
+  // Add visualisation field on module install.
+  $storage_definition = BaseFieldDefinition::create('string_long')
+    ->setRevisionable(FALSE)
+    ->setTranslatable(FALSE)
+    ->setRequired(FALSE)
+    ->setLabel(t('Visualisation'))
+    ->setCardinality(1)
+    ->setDisplayOptions('view', [
+      'label' => 'hidden',
+      'type' => 'visualisation_formatter',
+      'weight' => 4,
+    ])
+    ->setDisplayOptions('form', [
+      'type' => 'visualisation_select',
+      'weight' => 4,
+    ])
+    ->setDisplayConfigurable('form', TRUE)
+    ->setDisplayConfigurable('view', TRUE);
+
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('visualisation', 'resource', 'resource', $storage_definition);
+}

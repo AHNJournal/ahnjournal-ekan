@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.field_mime_type
+    - taxonomy.vocabulary.format
+id: taxonomy_term.format.field_mime_type
+field_name: field_mime_type
+entity_type: taxonomy_term
+bundle: format
+label: 'Mime type'
+description: 'Mime types (e.g. "application/pdf") that map to this format. Assists automatically detecting resource format on upload.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

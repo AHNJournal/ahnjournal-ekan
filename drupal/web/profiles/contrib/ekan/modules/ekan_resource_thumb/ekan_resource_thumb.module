@@ -1,0 +1,125 @@
+<?php
+
+/**
+ * @file
+ * Ekan resources thumnbail .module file.
+ */
+
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Queue\SuspendQueueException;
+
+/**
+ * Implements hook_entity_base_field_info().
+ */
+function ekan_resource_thumb_entity_base_field_info(EntityTypeInterface $entity_type) {
+  // Add file field to resource to hold the thumbnail image.
+  if ($entity_type->id() == 'resource') {
+
+    // Field thumbnail.
+    $fields['thumbnail'] = BaseFieldDefinition::create('image')
+      ->setLabel(t('Thumbnail image'))
+      ->setSetting('file_extensions', 'jpg jpeg png')
+      ->setSetting('alt_field', FALSE)
+      ->setDescription(t('A thumbnail representing the resource. Auto-generated for PDF resources if left empty.'))
+      ->setDisplayOptions('form', [
+        'type' => 'image',
+        'weight' => 3,
+      ])
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    return $fields;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_insert().
+ */
+function ekan_resource_thumb_resource_insert(EntityInterface $entity) {
+  _ekan_resource_thumb_add_item_to_queue($entity);
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_update().
+ */
+function ekan_resource_thumb_resource_update(EntityInterface $entity) {
+  $block_requeue = &drupal_static('ekan_resource_thumb_lock', FALSE);
+  if (!$block_requeue) {
+    _ekan_resource_thumb_add_item_to_queue($entity);
+  }
+}
+
+/**
+ * Add items to resource thumbnail queue.
+ */
+function _ekan_resource_thumb_add_item_to_queue(EntityInterface $entity) {
+  /** @var \Drupal\File\Entity\File $uploaded_file */
+  $uploaded_file = $entity->get('upload')->entity;
+  // Only add to queue if there is a pdf uploaded and
+  // there is no cover image already provided.
+  if ($entity->get('thumbnail')->isEmpty() && $uploaded_file && $uploaded_file->getMimeType() == 'application/pdf') {
+    $data['entity_id'] = $entity->id();
+    $queue = \Drupal::queue('ekan_resource_thumb_queue');
+    $queue->createQueue();
+    $queue->createItem($data);
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ekan_resource_thumb_form_alter(&$form, $form_state, $form_id) {
+  switch ($form_id) {
+    case 'resource_form':
+    case 'resource_edit_form':
+      // Add a submit handler to process some queue items so that
+      // thumbnail generation can happen immediately on user save via a form,
+      // but not on a bulk update.
+      foreach (array_keys($form['actions']) as $action) {
+        if ($action != 'preview' && isset($form['actions'][$action]['#type']) && $form['actions'][$action]['#type'] === 'submit') {
+          $form['actions'][$action]['#submit'][] = 'ekan_resource_thumb_form_submit';
+        }
+      }
+
+      break;
+  }
+}
+
+/**
+ * Submit handler to process thumbnail generation on save.
+ *
+ * Resource entity saves push items into the queue. Here we just
+ * process one.
+ *
+ * If a bulk update (e.g. migrate) saved the entities then a long
+ * queue is build but each save is not slowed down. If the user saved
+ * the entity then we give it a chance to process straight away.
+ */
+function ekan_resource_thumb_form_submit(array $form, FormStateInterface $form_state) {
+  $queue = \Drupal::queue('ekan_resource_thumb_queue');
+  /** @var \Drupal\Core\Queue\QueueWorkerInterface $queue_worker */
+  $queue_worker = \Drupal::service('plugin.manager.queue_worker')->createInstance('ekan_resource_thumb_queue');
+
+  $no_of_items = $queue->numberOfItems();
+
+  if ($no_of_items > 0) {
+    // Process one. Probably the node just saved.
+    if ($item = $queue->claimItem()) {
+      try {
+        // Process it.
+        $queue_worker->processItem($item->data);
+        // If everything was correct, delete the processed item from the queue.
+        $queue->deleteItem($item);
+      }
+      catch (SuspendQueueException $e) {
+        // If there was an Exception thrown because of an error
+        // release the item that the worker could not process.
+        // Another worker can come and process it.
+        $queue->releaseItem($item);
+      }
+    }
+  }
+}

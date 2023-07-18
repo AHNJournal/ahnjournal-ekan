@@ -1,0 +1,13 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - ekan_core
+id: resource
+label: Resource
+type: 'canonical_entities:resource'
+pattern: 'resource/[resource:title]'
+selection_criteria: {  }
+selection_logic: and
+weight: -6
+relationships: {  }

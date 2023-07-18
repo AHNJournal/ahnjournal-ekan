@@ -1,0 +1,308 @@
+//search page side menu
+.page_main-content {
+
+  #views-exposed-form-search-box-page-1 {
+    #edit-actions {
+      position: absolute;
+      right: 0;
+      top: 45px;
+
+      input#edit-submit-ekan-search {
+        font-family: $icon-font;
+        font-weight: 600;
+      }
+    }
+  }
+
+  .page__content {
+    .search-page {
+
+      .search-result {
+        .icon {
+          font-size: 42px;
+          color: $brand-secondary;
+        }
+
+        .views-field-publisher {
+          color: $gray-light;
+        }
+      }
+
+      form#views-exposed-form-ekan-search-page-1 {
+
+        .form-group {
+          margin:0;
+        }
+
+        label {
+          font-weight: bold;
+        }
+
+        @include make-row();
+        align-items: flex-end;
+        margin-top: 0;
+        margin-bottom: 1em;
+
+        .form-item-s {
+          @include make-col-ready();
+          @include make-col(5);
+        }
+
+        .form-item-sort-by,
+        .form-item-sort-order {
+          @include make-col-ready();
+          @include make-col(2);
+        }
+
+        .form-actions {
+          @include make-col-ready();
+          @include make-col(3);
+        }
+
+        @media #{$tablet} {
+          .form-group {
+            @include make-col(12);
+          }
+        }
+      }
+
+      .views-row {
+        padding: 20px 0;
+        border-bottom: .5px dotted lightgrey;
+      }
+
+      .views-field-title, .views-field-title-1, .views-field-title-2 {
+        margin-bottom: .5em;
+
+        a {
+          font-size: 30px;
+          font-weight: 400;
+        }
+      }
+
+      .views-field-topic {
+        margin: 8px 0;
+
+        .field-content {
+          display: flex;
+        }
+      }
+
+      .views-field-ekan-dataset-resource-formats,
+      .views-field-ekan-dataset-resource-formats-1 {
+        font-size: 0.85em;
+
+        a {
+          background-color: olive;
+          border-radius: 3px;
+          color: white;
+          display: inline;
+          font-size: 12px;
+          font-weight: bold;
+          line-height: 16px;
+          margin: -3px 2px 0;
+          padding: 1px 4px 2px;
+          text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+          vertical-align: baseline;
+          white-space: nowrap;
+        }
+
+        a[data-format="pdf"] {
+          background-color: #e0051e;
+        }
+
+        a[data-format="csv"] {
+          background-color: #a64300;
+        }
+
+        a[data-format="zip"] {
+          background-color: #686868;
+        }
+
+        a[data-format="xls"] {
+          background-color: #018931;
+        }
+
+        a[data-format="kml"] {
+          background-color: #3F6EA5;
+        }
+
+        a[data-format="html"] {
+          background-color: #317daa;
+        }
+
+        a[data-format="jpeg"], a[data-format="jpg"] {
+          background-color: blue;
+        }
+
+        a[data-format="json"], a[data-format="geojson"], a[data-format="xml"] {
+          background-color: #d14900;
+        }
+
+        a[data-format="txt"], a[data-format="text"] {
+          background-color: #015924;
+        }
+
+        a[data-format="api"] {
+          background-color: #317daa;
+        }
+
+        a[data-format="rdf"], a[data-format="rdf"], a[data-format="nquad"], a[data-format="ntriples"], a[data-format="turtle"] {
+          background-color: #0b4498;
+        }
+
+        a[data-format="data"] {
+          background-color: #7a7a00;
+        }
+
+        a[data-format="ppt"], a[data-format="pptx"] {
+          background-color: #CF452C;
+        }
+      }
+    }
+  }
+
+  .page__content_left {
+
+    .facet-inactive,
+    .facet-active {
+
+      position: relative;
+
+      details {
+        summary {
+          list-style-type: none;
+        }
+      }
+
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+
+      details summary::marker {
+        display: none;
+      }
+
+
+      h3 {
+        background-color: $brand-primary;
+        color: white;
+        padding: 6px 13px;
+        font-weight: initial;
+        margin: 0;
+        font-size: 20px;
+
+        &:after {
+          font-family: $icon-font;
+          font-weight: 900;
+          content: "\f078";
+          float: right;
+        }
+
+        &::-webkit-details-marker {
+          display: none
+        }
+      }
+
+      details[open] {
+        summary {
+          h3 {
+            &:after {
+              content: "\f077";
+            }
+          }
+        }
+      }
+
+      .facet-empty {
+        h3:after {
+          font-family: $icon-font;
+          font-weight: 900;
+          content: "\f078";
+          float: right;
+        }
+      }
+
+      ul {
+        padding-left: 0;
+        margin-bottom: 0;
+
+        li.facet-item {
+          list-style-type: none;
+          border: 1px solid lightgrey;
+          padding: 6px 20px 6px 10px;
+
+          .facet-item__status {
+            display: none;
+          }
+
+          .remove-active {
+            position: absolute;
+            right: 3px;
+            padding: 0 0.75rem;
+          }
+
+          input[type=checkbox] {
+            display: none;
+          }
+
+          a {
+            .facet-item__value {
+              word-break: break-word;
+            }
+          }
+        }
+      }
+
+      &:first-child {
+        h3 {
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+        }
+      }
+
+      &:last-child {
+        .facet-empty {
+          h3 {
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+          }
+        }
+      }
+
+      &:last-child {
+        .facet-item:last-child {
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+        }
+
+      }
+      .js-facets-widget {
+        #active-checkbox {
+          background-color: lightgrey;
+
+          &:after {
+            content: "";
+            width: 27px;
+            height: 27px;
+            background-color: lightgray;
+            transform: rotate(45deg);
+            border-radius: 2px;
+            position: absolute;
+            //top: 72px;
+            right: -14px;
+            z-index: -1;
+            border: 1px solid $border;
+            border-top: none;
+            border-right: none;
+            margin-top: -2px;
+          }
+
+          i {
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

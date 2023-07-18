@@ -1,0 +1,34 @@
+{
+    "result": {
+        "path": "dynamic-transportation-visualizations",
+        "uuid": "65ac2924-92c8-4915-b228-c7975ccb61b0",
+        "id": "37",
+        "type": "data_dashboard",
+        "title": "Dynamic Transportation Visualizations",
+        "created": "1472693478",
+        "changed": "1472709471",
+        "body": {
+            "und": [
+                {
+                    "value": "Transportation systems across the country are adapting to meet the needs of their stakeholders. It's a basic service that many citizens rely on, so it has to work for everyone all of the time. ",
+                    "summary": "",
+                    "format": "html",
+                    "safe_value": "<p>Transportation systems across the country are adapting to meet the needs of their stakeholders. It's a basic service that many citizens rely on, so it has to work for everyone all of the time.</p>\n",
+                    "safe_summary": ""
+                }
+            ]
+        },
+        "field_topic": [
+            {
+                "name": "Transportation",
+                "display_name": "Transportation",
+                "id": "f8112e3b-d62d-433d-9b9b-724e56ef3fd8"
+            },
+            {
+                "name": "City Planning",
+                "display_name": "City Planning",
+                "id": "ed451aa0-f7fc-409a-b3be-30a5b7f26751"
+            }
+        ]
+    }
+}

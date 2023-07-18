@@ -1,0 +1,24 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - ekan_theme
+id: mainpagecontent_2
+theme: ekan_theme
+region: content_top
+weight: 0
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content_home_banner'
+  label_display: '0'
+  provider: system
+visibility:
+  request_path:
+    id: request_path
+    pages: /home
+    negate: false
+    context_mapping: {  }

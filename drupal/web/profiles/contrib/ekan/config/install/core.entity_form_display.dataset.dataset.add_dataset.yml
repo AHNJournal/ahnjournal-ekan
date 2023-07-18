@@ -1,0 +1,198 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.dataset.add_dataset
+  module:
+    - allowed_formats
+    - autocomplete_deluxe
+    - ekan_core
+    - field_group
+    - path
+    - text
+third_party_settings:
+  field_group:
+    group_info:
+      children:
+        - group_authoring_information
+        - group_publishing_options
+      parent_name: ''
+      weight: 6
+      format_type: tabs
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: true
+        open: false
+        direction: vertical
+      label: info
+    group_authoring_information:
+      children:
+        - uid
+        - author
+      parent_name: group_info
+      weight: 20
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: open
+        required_fields: false
+      label: 'Authoring information'
+    group_publishing_options:
+      children:
+        - path
+        - status
+      parent_name: group_info
+      weight: 21
+      format_type: tab
+      region: content
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        formatter: closed
+        required_fields: false
+      label: 'Publishing options'
+id: dataset.dataset.add_dataset
+targetEntityType: dataset
+bundle: dataset
+mode: add_dataset
+content:
+  author:
+    type: string_textfield
+    weight: 22
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  body:
+    type: text_textarea
+    weight: 1
+    region: content
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings:
+      allowed_formats:
+        hide_help: '1'
+        hide_guidelines: '1'
+  license:
+    type: license_select
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  path:
+    type: path
+    weight: 23
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  publisher:
+    type: autocomplete_deluxe
+    weight: 2
+    region: content
+    settings:
+      match_operator: CONTAINS
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
+      size: 60
+      selection_handler: default
+      limit: 10
+      min_length: 0
+      delimiter: ''
+      not_found_message_allow: false
+      not_found_message: 'The term ''@term'' will be added'
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
+    third_party_settings: {  }
+  status:
+    type: boolean_checkbox
+    weight: 100
+    region: content
+    settings:
+      display_label: true
+    third_party_settings: {  }
+  tags:
+    type: autocomplete_deluxe
+    weight: 3
+    settings:
+      limit: '10'
+      min_length: '0'
+      delimiter: ''
+      not_found_message: 'The term ''@term'' will be added'
+      new_terms: '1'
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
+      not_found_message_allow: 0
+      match_operator: CONTAINS
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
+      size: 60
+      selection_handler: default
+    region: content
+    third_party_settings: {  }
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: 'eg. A descriptive title'
+    third_party_settings: {  }
+  topic:
+    type: autocomplete_deluxe
+    weight: 4
+    settings:
+      match_operator: CONTAINS
+      autocomplete_route_name: autocomplete_deluxe.autocomplete
+      size: 60
+      selection_handler: default
+      limit: 10
+      min_length: 0
+      delimiter: ''
+      not_found_message_allow: false
+      not_found_message: 'The term ''@term'' will be added'
+      new_terms: false
+      no_empty_message: 'No terms could be found. Please type in order to add a new term.'
+    region: content
+    third_party_settings: {  }
+  uid:
+    type: entity_reference_autocomplete
+    weight: 21
+    region: content
+    settings:
+      match_operator: CONTAINS
+      match_limit: 10
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  Spatial: true
+  additional_info: true
+  conforms_to: true
+  contact_email: true
+  contact_name: true
+  data_dictionary: true
+  data_dictionary_type: true
+  frequency: true
+  granularity: true
+  harvest_source_issue: true
+  harvest_source_modified: true
+  harvest_source_ref: true
+  is_part_of: true
+  landing_page: true
+  langcode: true
+  language: true
+  orphan: true
+  pod_theme: true
+  public_access_level: true
+  related_content: true
+  rights: true
+  spatial: true
+  spatial_geographical_cover: true
+  temporal_coverage: true
