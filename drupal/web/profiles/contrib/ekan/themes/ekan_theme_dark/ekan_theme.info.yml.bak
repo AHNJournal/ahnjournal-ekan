@@ -1,0 +1,36 @@
+name: fndh_theme_dark
+description: A dark theme based on the default ekan theme (Radix).
+screenshot: screenshot.png
+core_version_requirement: ^8 || ^9
+engine: twig
+type: theme
+base theme: radix
+
+regions:
+  navbar_branding: Navbar branding
+  navbar_left:  Navbar left
+  navbar_right: Navbar right
+  header: Header
+  content_top: Content top
+  content_left: Content left
+  content: Content
+  page_bottom: Page bottom
+  footer: Footer
+
+libraries:
+#  - radix/style
+  - ekan_theme/bootstrap
+  - ekan_theme/style
+  - ekan_theme/icons
+
+libraries-override:
+  radix/bootstrap: false
+  radix/style: false
+
+ckeditor5_stylesheets:
+  - assets/css/ekan_theme.style.css
+
+component-libraries:
+  ekan_theme:
+    paths:
+      - ./src/components

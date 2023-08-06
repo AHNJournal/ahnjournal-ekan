@@ -20,6 +20,7 @@
 {% if path %}
   <a href="{{ path }}" class="navbar-brand d-flex align-items-center {{ utility_classes }}" aria-label="{{ text }}">
     {% if image %}
+      {# XXX: we want the png image, not the svg. (smart) #}
       {{ navbar_brand.image(image, width, height, alt) }}
     {% endif %}
     {{ text }}

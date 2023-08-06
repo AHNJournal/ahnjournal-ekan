@@ -1,0 +1,108 @@
+<?php
+/**
+ * @file
+ * Theme functions
+ */
+
+use Drupal\Component\Render\FormattableMarkup;
+use Drupal\Component\Utility\Html;
+use Drupal\Core\Render\Markup;
+use Drupal\facets\FacetInterface;
+use Drupal\taxonomy\Entity\Term;
+
+// Include all files from the includes directory.
+$includes_path = dirname(__FILE__) . '/includes/*.inc';
+foreach (glob($includes_path) as $filename) {
+  require_once dirname(__FILE__) . '/includes/' . basename($filename);
+}
+
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function ekan_theme_theme_preprocess_page(&$variables) {
+  $variables['page_id'] = 'page--' . Html::cleanCssIdentifier(\Drupal::routeMatch()
+      ->getRouteName());
+
+  // get the current node create time and type.
+  $node = \Drupal::routeMatch()->getParameter('node');
+
+  // get the content type name
+  if ($node) {
+    $variables['content_type_title'] = $node->type->entity->label();;
+  }
+}
+
+/**
+ * Implements hook_preprocess_field().
+ */
+function ekan_theme_preprocess_field(&$variables) {
+  // Turn the license field in to a link if it can be.
+  if ($variables['field_name'] == 'license') {
+    /** @var \Drupal\Core\Field\FieldItemListInterface $items */
+    $items = $variables['element']['#items'];
+    foreach($items as $delta => $item) {
+      try {
+        $url = \Drupal\Core\Url::fromUri($item->value)->setOption('attributes', ['target' => '_blank']);
+        $link = \Drupal\Core\Link::fromTextAndUrl($item->value, $url);
+        $variables['items'][$delta]['content'] = $link->toRenderable();
+      } catch (InvalidArgumentException $ex) {
+        // Bad url.
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess().
+ */
+function ekan_theme_preprocess(&$variables, $hook) {
+  $variables['base_path'] = base_path();
+}
+
+/**
+ * Implements hook_preprocess_facets_result_item().
+ */
+function ekan_theme_preprocess_facets_result_item(&$variables) {
+
+  $facet = $variables['facet'];
+  $variables['icon'] = null;
+  assert($facet instanceof FacetInterface);
+
+  if (in_array($facet->id(), ['content_type'])) {
+    $icon_class = 'icon-dkan-' . strtolower(Html::cleanCssIdentifier($variables['value']));
+    $variables['icon'] = new FormattableMarkup('<i class="' . $icon_class . '"></i>', []);
+  }
+
+  if (in_array($facet->id(), ['topic'])) {
+    $term = Term::load($variables['raw_value']);
+    /** @var \Drupal\ekan_core\Service\EkanIconHandler $icon_handler */
+    $icon_handler = \Drupal::service('ekan_core.icon_handler');
+    if ($term) {
+      $variables['icon'] = Markup::create($icon_handler->getIconForEntity($term));
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_facets_item_list().
+ */
+function ekan_theme_preprocess_facets_item_list(&$variables) {
+  $facet = $variables['facet'];
+  assert($facet instanceof FacetInterface);
+  $variables['is_open'] = '';
+
+  if (!empty(\Drupal::request()->query->get('f')) || !empty(\Drupal::request()->query->get('s')) || in_array($facet->id(), ['content_type', 'topic'])) {
+    $variables['is_open'] = 'open';
+  }
+
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function ekan_theme_form_alter(&$form, &$form_state, $form_id) {
+  if ($form_id == 'node_page_form' && isset($form['promote'])) {
+    $form['promote']['widget']['value']['#default_value'] = False;
+  }
+}

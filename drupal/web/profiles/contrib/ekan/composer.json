@@ -13,7 +13,7 @@
     "drupal/key_value_field": "^1.2",
     "drupal/leaflet": "^2.1",
     "drupal/migrate_tools": "^5.0",
-    "drupal/radix": "^4.10",
+    "drupal/radix": "^4.12",
     "drupal/role_delegation": "^1.1",
     "drupal/search_api": "^1.17",
     "drupal/twig_tweak": "^2.6",

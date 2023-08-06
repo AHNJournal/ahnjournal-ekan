@@ -1,7 +1,8 @@
 name: Ekan
 type: profile
 core_version_requirement: ^9.0
-description: 'EKAN Profile'
+description: 'ONRP default theme (dark)'
+logo: 'images/logo.png'
 distribution:
   name: 'Drupal'
 dependencies:
@@ -56,5 +57,5 @@ dependencies:
   - paragraphs
 
 themes:
-  - ekan_theme
+  - ekan_theme_dark
   - claro

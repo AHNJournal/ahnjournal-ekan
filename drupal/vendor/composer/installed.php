@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'eightyoptions/ekan_distribution',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-master-prod',
+        'version' => 'dev-master-prod',
+        'reference' => 'd9fad6578b178b2818f51009dd2a5c101dca6c5d',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -617,9 +617,9 @@
             'dev_requirement' => false,
         ),
         'eightyoptions/ekan_distribution' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-master-prod',
+            'version' => 'dev-master-prod',
+            'reference' => 'd9fad6578b178b2818f51009dd2a5c101dca6c5d',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
