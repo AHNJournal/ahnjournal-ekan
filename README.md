@@ -1,6 +1,10 @@
 EKAN on Drupal 10 README
 
-Frontend test site with custom Ekan theme (Drupal 10): 
+Data/Research repository similar to DKAN and compatible with Drupal 10 (php 8.2) 
+
+Development site: 
 https://open-neurosecurity.org/collections
 
-Please report bugs and issues to smart@open-neurosecurity.org.
+Maintainer:
+
+Please report bugs and issues to smart@open-neurosecurity.org
